@@ -1,16 +1,8 @@
-import {Timer} from './timer';
+import { createTimers } from './timer';
 
+export const gameSettings = {
+   choosenTime : 4, 
+  };
 export const App = ({}) => {
+	createTimers();
 };
-
-const timer = new Timer(3);
-timer.startCounting();
-
-setTimeout(() => {
-    timer.stopCounting();
-}, 5000);
-
-
-setTimeout(() => {
-    timer.startCounting();
-}, 5000);
