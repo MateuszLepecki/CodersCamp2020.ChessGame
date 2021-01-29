@@ -7,6 +7,9 @@ body {
     background-image: url('../photos/img1.png');
     width: 100vw;
     height: 100vh;
+}
+#main-wrap {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;

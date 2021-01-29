@@ -1,12 +1,12 @@
-const body = document.getElementById('body');
+const main = document.getElementById('main-wrap');
 const board = document.createElement('div');
 board.classList.add('board');
 const outerBoard = document.createElement('div');
 outerBoard.classList.add('outerBoard');
 const numbers = document.createElement('div');
 numbers.classList.add('numbers');
-body!.appendChild(numbers);
-body!.appendChild(outerBoard);
+main!.appendChild(numbers);
+main!.appendChild(outerBoard);
 outerBoard.appendChild(board);
 const letters = document.createElement('div');
 letters.classList.add('letters');

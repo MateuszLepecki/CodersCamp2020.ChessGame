@@ -1,15 +1,15 @@
 "use strict";
 exports.__esModule = true;
 exports.chessboard = void 0;
-var body = document.getElementById('body');
+var main = document.getElementById('main-wrap');
 var board = document.createElement('div');
 board.classList.add('board');
 var outerBoard = document.createElement('div');
 outerBoard.classList.add('outerBoard');
 var numbers = document.createElement('div');
 numbers.classList.add('numbers');
-body.appendChild(numbers);
-body.appendChild(outerBoard);
+main.appendChild(numbers);
+main.appendChild(outerBoard);
 outerBoard.appendChild(board);
 var letters = document.createElement('div');
 letters.classList.add('letters');
