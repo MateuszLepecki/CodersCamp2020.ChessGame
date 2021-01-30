@@ -89,7 +89,7 @@ const createDOMElement = (type: string, className: string, parent: HTMLElement, 
     return newElement;
 };
 
-const changeTimeToString = (minutes: number, seconds: number): string => {
+export const changeTimeToString = (minutes: number, seconds: number): string => {
     let stringMinutes = minutes.toString();
     let stringSeconds = seconds.toString();
 
