@@ -9,13 +9,13 @@ export class Timer {
     minutes: number;
     seconds: number;
     stopped: boolean;
-    color: string;
+    player: string;
 
-    constructor(initialTime: number, color: string) {
+    constructor(initialTime: number, player: string) {
         this.minutes = initialTime;
         this.seconds = 0;
         this.stopped = true;
-        this.color = color;
+        this.player = player;
     }
 
     startCounting(): void {
@@ -81,7 +81,7 @@ export const insertTimerIntoDOM = (timerOne: Timer, timerTwo: Timer): HTMLElemen
     return [player1timer, player2timer];
 };
 
-const createDOMElement = (type: string, className: string, parent: HTMLElement, text = ''): HTMLElement => {
+export const createDOMElement = (type: string, className: string, parent: HTMLElement, text = ''): HTMLElement => {
     const newElement = document.createElement(type);
     newElement.className = className;
     newElement.innerText = text;
@@ -89,7 +89,7 @@ const createDOMElement = (type: string, className: string, parent: HTMLElement, 
     return newElement;
 };
 
-export const changeTimeToString = (minutes: number, seconds: number): string => {
+export const changeTimeToString = (minutes: number, seconds: number) => {
     let stringMinutes = minutes.toString();
     let stringSeconds = seconds.toString();
 
@@ -123,3 +123,4 @@ const updateDOMTimer = (timerOne: Timer, timerTwo: Timer) => {
 const turnTimerOffFaster = () => {
     cancelTimer = true;
 };
+
