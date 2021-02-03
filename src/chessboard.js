@@ -4,19 +4,29 @@ exports.chessboard = void 0;
 var main = document.getElementById('main-wrap');
 var board = document.createElement('div');
 board.classList.add('board');
+var img = document.createElement('img');
+img.classList.add('img');
+img.src = '#';
 var outerBoard = document.createElement('div');
 outerBoard.classList.add('outerBoard');
 var numbers = document.createElement('div');
 numbers.classList.add('numbers');
+var takenPawns = document.createElement('div');
+takenPawns.classList.add('taken-pawns');
+var listOfMoves = document.createElement('div');
+listOfMoves.classList.add('list-of-moves');
+main.appendChild(img);
 main.appendChild(numbers);
 main.appendChild(outerBoard);
-outerBoard.appendChild(board);
+main.appendChild(takenPawns);
+main.appendChild(listOfMoves);
 var letters = document.createElement('div');
 letters.classList.add('letters');
 outerBoard.appendChild(letters);
+outerBoard.appendChild(board);
 function chessboard() {
     function getBoard() {
-        for (var i = 0; i < 8; i++) {
+        for (var i = 8; i >= 1; i--) {
             var row = document.createElement('div');
             row.classList.add('row');
             if (i % 2 !== 0) {
@@ -24,12 +34,20 @@ function chessboard() {
             }
             for (var j = 0; j < 8; j++) {
                 var square = document.createElement('div');
-                square.classList.add('square');
-                if (j % 2 === 0) {
-                    square.style.backgroundColor = 'white';
+                var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+                var secArr = ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
+                if (i % 2 === 1) {
+                    square.classList.add("" + secArr[j] + i);
                 }
                 else {
-                    square.style.backgroundColor = 'black';
+                    square.classList.add("" + arr[j] + i);
+                }
+                square.classList.add('square');
+                if (j % 2 === 0) {
+                    square.style.backgroundColor = '#6C1A31';
+                }
+                else {
+                    square.style.backgroundColor = '#D67E03';
                 }
                 row.appendChild(square);
             }
@@ -46,35 +64,10 @@ function chessboard() {
     }
     function getLetters() {
         for (var i = 0; i < 8; i++) {
+            var letterArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
             var letter = document.createElement('div');
-            letter.classList.add('number');
-            switch (i) {
-                case 0:
-                    letter.innerText = 'a';
-                    break;
-                case 1:
-                    letter.innerText = 'b';
-                    break;
-                case 2:
-                    letter.innerText = 'c';
-                    break;
-                case 3:
-                    letter.innerText = 'd';
-                    break;
-                case 4:
-                    letter.innerText = 'e';
-                    break;
-                case 5:
-                    letter.innerText = 'f';
-                    break;
-                case 6:
-                    letter.innerText = 'g';
-                    break;
-                case 7:
-                    letter.innerText = 'h';
-                    break;
-            }
-            i;
+            letter.classList.add('letter');
+            letter.innerText = "" + letterArray[i];
             letters.appendChild(letter);
         }
     }
