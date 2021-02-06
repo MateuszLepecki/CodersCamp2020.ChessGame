@@ -1,7 +1,14 @@
 export {};
-type coordinates = [number, number];
-const AREASARRAY: Area[] = [];
-const COLOR = ['white', 'black'];
+import { coordinates } from './piece';
+import { Piece } from './piece';
+import { King } from './king';
+import { Queen } from './queen';
+import { Rock } from './rock';
+import { Bishop } from './bishop';
+import { Pawn } from './pawn';
+import { Knight } from './knight';
+
+export const AREASARRAY: Area[] = [];
 const BOARD = document.querySelector('.board')! as HTMLElement;
 
 enum Letters {
@@ -15,77 +22,6 @@ enum Letters {
     H,
 }
 
-// const COLUMN = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-
-class Piece {
-    type: string = 'noneType';
-    color: string = 'noneColor';
-    location: coordinates = [-1, -1];
-    possibilities(): void {}
-    moveIfPossible(whereToPlace: coordinates): void {
-        let currentIndex = getAreaArrayIndex(this.location);
-        AREASARRAY[currentIndex].deletePiece();
-        this.location = whereToPlace;
-        let index = getAreaArrayIndex(whereToPlace);
-
-        AREASARRAY[index].deletePiece();
-        AREASARRAY[index].putPieceHere(this);
-        const stringCoordinates = changeArrayCoordinatesToString(whereToPlace);
-        const querySquare = document.querySelector('.' + stringCoordinates)! as HTMLElement;
-        querySquare.innerText = this.type;
-    }
-    initializePiece = (place: coordinates) => {
-        const stringCoordinates = changeArrayCoordinatesToString(place);
-        const querySquare = document.querySelector('.' + stringCoordinates)! as HTMLElement;
-        querySquare.innerText = this.type;
-    };
-    constructor(type: string, color: string, location: coordinates) {
-        this.type = type;
-        this.color = color;
-        this.location = location;
-        this.moveIfPossible(location);
-        this.initializePiece(location);
-    }
-}
-class King extends Piece {
-    constructor(color: string, location?: coordinates) {
-        if (color == 'white') location = [5, 1];
-        else location = [5, 8];
-        super('king', color, location);
-    }
-}
-
-class Queen extends Piece {
-    constructor(color: string, location?: coordinates) {
-        if (color == 'white') location = [4, 1];
-        else location = [4, 8];
-        super('queen', color, location);
-    }
-}
-
-class Rock extends Piece {
-    constructor(color: string, location: coordinates) {
-        super('rock', color, location);
-    }
-}
-class Pawn extends Piece {
-    constructor(color: string, location: coordinates) {
-        super('pawn', color, location);
-    }
-}
-
-class Bishop extends Piece {
-    constructor(color: string, location: coordinates) {
-        super('bishop', color, location);
-    }
-}
-
-class Knight extends Piece {
-    constructor(color: string, location: coordinates) {
-        super('knight', color, location);
-    }
-}
-
 class Area {
     areaCoordinates: coordinates = [-1, -1];
     piece: Piece | {};
@@ -94,9 +30,6 @@ class Area {
         this.areaCoordinates[1] = column;
         this.piece = {};
     }
-    // get getAreaCoordinates(): coordinates {
-    //     return this.areaCoordinates;
-    // }
     putPieceHere(newPiece: Piece) {
         this.piece = newPiece;
     }
@@ -108,6 +41,16 @@ class Area {
         querySquare.innerText = '';
     }
 }
+
+export const createBoardArray = () => {
+    for (let row = 1; row < 9; row++) {
+        for (let column = 1; column < 9; column++) {
+            let newArea = new Area(row, column);
+            AREASARRAY.push(newArea);
+        }
+    }
+    insertPieces();
+};
 
 const insertPieces = () => {
     setTimeout(() => {
@@ -138,34 +81,8 @@ const insertPieces = () => {
         console.table(AREASARRAY);
     }, 1000);
 };
-const createBoardArray = () => {
-    for (let row = 1; row < 9; row++) {
-        for (let column = 1; column < 9; column++) {
-            let newArea = new Area(row, column);
-            AREASARRAY.push(newArea);
-        }
-    }
-    insertPieces();
-};
 
-createBoardArray();
-
-const listenSelection = (e: Event) => {
-    console.log('listen selection');
-    let target: any = e.target!; // WHAT WILL BE THE PROPER TYPE ??
-    const stringCoordinates: string = target.classList[0];
-    let arr = changeStringCoordinatesToArray(stringCoordinates);
-    let index = getAreaArrayIndex(arr);
-    if (AREASARRAY[index].piece instanceof Piece) {
-        selectPiece(arr);
-        BOARD.removeEventListener('click', listenSelection);
-    }
-};
-
-export const listenDOMchessboard = () => {
-    BOARD.addEventListener('click', listenSelection);
-};
-const changeArrayCoordinatesToString = (position: coordinates): string => {
+export const changeArrayCoordinatesToString = (position: coordinates): string => {
     const column = Letters[position[0] - 1];
     const row = position[1].toString();
     const resultString: string = column + row;
@@ -178,24 +95,27 @@ const changeStringCoordinatesToArray = (position: string): coordinates => {
     resultArray[1] = +position[1];
     return resultArray;
 };
-
-// const initializePiece=(place:coordinates)=>{
-//     const stringCoordinates = changeArrayCoordinatesToString(place)
-//     const querySquare = document.querySelector('.' + stringCoordinates)! as HTMLElement;
-//     querySquare.innerText= 'p';
-// }
-
+const listenSelection = (e: Event) => {
+    let target: any = e.target!; // WHAT WILL BE THE PROPER TYPE ??
+    const stringCoordinates: string = target.classList[0];
+    let arr = changeStringCoordinatesToArray(stringCoordinates);
+    let index = getAreaArrayIndex(arr);
+    if (AREASARRAY[index].piece instanceof Piece) {
+        selectPiece(arr);
+        BOARD.removeEventListener('click', listenSelection);
+    }
+};
+export const listenDOMchessboard = () => {
+    BOARD.addEventListener('click', listenSelection);
+};
 const selectPiece = (position: coordinates) => {
     BOARD.removeEventListener('click', listenSelection);
     let index = getAreaArrayIndex(position);
     const currentPiece = AREASARRAY[index].piece! as Piece;
     const listenNewPosition = (e: Event) => {
-        console.log('inside event function');
         let target: any = e.target!; // WHAT WILL BE THE PROPER TYPE ??
         const stringCoordinates: string = target.classList[0];
         let arr = changeStringCoordinatesToArray(stringCoordinates);
-        console.log('new place', arr);
-        console.log(currentPiece);
         currentPiece.moveIfPossible(arr);
         BOARD.removeEventListener('click', listenNewPosition);
         BOARD.addEventListener('click', listenSelection);
@@ -205,7 +125,7 @@ const selectPiece = (position: coordinates) => {
     } else BOARD.addEventListener('click', listenSelection);
 };
 
-const getAreaArrayIndex = (coordinates: coordinates): number => {
+export const getAreaArrayIndex = (coordinates: coordinates): number => {
     let index = AREASARRAY.findIndex((e) => {
         if (e.areaCoordinates[0] == coordinates[0] && e.areaCoordinates[1] == coordinates[1]) return e;
     });

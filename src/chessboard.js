@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.chessboard = void 0;
 var main = document.getElementById('main-wrap');
 var board = document.createElement('div');
