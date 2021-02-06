@@ -27,9 +27,7 @@ var Piece = /** @class */ (function () {
     }
     Piece.prototype.moveIfPossible = function (whereToPlace) {
         this.checkPossibleMoves();
-        console.log(this.possibleLocations, 'locations');
         if (this.possibleLocations.findIndex(function (e) {
-            console.log('e', e);
             return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
         }) != -1) {
             var currentIndex = logic_2.getAreaArrayIndex(this.location);

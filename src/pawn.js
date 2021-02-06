@@ -24,38 +24,33 @@ var Pawn = /** @class */ (function (_super) {
     }
     Pawn.prototype.checkPossibleMoves = function () {
         this.possibleLocations = [];
-        for (var i = 0; i < 4; i++) {
-            var dir = [0, 0];
-            switch (i) {
-                case 0:
-                    dir = [1, 1];
-                    break;
-                case 1:
-                    dir = [-1, 1];
-                    break;
-                case 2:
-                    dir = [1, -1];
-                    break;
-                case 3:
-                    dir = [-1, -1];
-                    break;
-            }
-            for (var j = 1; j < 8; j++) {
-                var checkingPosition = [this.location[0] + j * dir[0], this.location[1] + j * dir[1]];
-                if (checkingPosition[0] < 1 ||
-                    checkingPosition[0] > 8 ||
-                    checkingPosition[1] < 1 ||
-                    checkingPosition[1] > 8)
-                    break;
-                var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-                if (PieceOnWay instanceof piece_1.Piece && PieceOnWay.color == this.color)
-                    break;
-                else if (PieceOnWay instanceof piece_1.Piece && PieceOnWay.color !== this.color) {
-                    this.possibleLocations.push(checkingPosition);
-                    break;
-                }
+        var dir = 0;
+        if (this.color == 'white')
+            dir = 1;
+        else
+            dir = -1;
+        for (var i = 0; i < 3; i++) {
+            var checkingPosition = [this.location[0] - 1 + i, this.location[1] + dir];
+            if (checkingPosition[0] < 1 ||
+                checkingPosition[0] > 8 ||
+                checkingPosition[1] < 1 ||
+                checkingPosition[1] > 8)
+                continue;
+            var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
+            if (PieceOnWay instanceof piece_1.Piece && PieceOnWay.color == this.color)
+                continue;
+            else if ((i === 0 || i === 2) && PieceOnWay instanceof piece_1.Piece && PieceOnWay.color !== this.color) {
+                console.log('i', i, '1 else');
                 this.possibleLocations.push(checkingPosition);
+                continue;
             }
+            else if (i === 0 ||
+                i === 2 ||
+                (i === 1 && PieceOnWay instanceof piece_1.Piece && PieceOnWay.color !== this.color)) {
+                console.log('i', i, '2 else');
+                continue;
+            }
+            this.possibleLocations.push(checkingPosition);
         }
     };
     return Pawn;

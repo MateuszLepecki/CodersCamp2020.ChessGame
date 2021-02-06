@@ -10,10 +10,8 @@ export abstract class Piece {
     possibleLocations: coordinates[] = [];
     moveIfPossible(whereToPlace: coordinates): void {
         this.checkPossibleMoves();
-        console.log(this.possibleLocations, 'locations');
         if (
             this.possibleLocations.findIndex((e) => {
-                console.log('e', e);
                 return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
             }) != -1
         ) {
