@@ -1,5 +1,8 @@
+import { createTimers } from './timer';
+
+export const gameSettings = {
+   choosenTime : 4, 
+  };
 export const App = ({}) => {
-	console.log('everything is OK');
-	console.log('everything is ee');
-	console.log('everhing is Oe3eK');
+	createTimers();
 };
