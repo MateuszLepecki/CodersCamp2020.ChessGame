@@ -24,11 +24,11 @@ enum Letters {
 
 class Area {
     areaCoordinates: coordinates = [-1, -1];
-    piece: Piece | {};
+    piece: Piece | 0;
     constructor(row: number, column: number) {
         this.areaCoordinates[0] = row;
         this.areaCoordinates[1] = column;
-        this.piece = {};
+        this.piece = 0;
     }
     putPieceHere(newPiece: Piece) {
         this.piece = newPiece;

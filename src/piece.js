@@ -10,7 +10,12 @@ var Piece = /** @class */ (function () {
         this.type = 'noneType';
         this.color = 'noneColor';
         this.location = [-1, -1];
+        this.possibleLocations = [];
         this.initializePiece = function (place) {
+            _this.location = place;
+            var index = logic_2.getAreaArrayIndex(place);
+            logic_3.AREASARRAY[index].deletePiece();
+            logic_3.AREASARRAY[index].putPieceHere(_this);
             var stringCoordinates = logic_1.changeArrayCoordinatesToString(place);
             var querySquare = document.querySelector('.' + stringCoordinates);
             querySquare.innerText = _this.type;
@@ -18,20 +23,25 @@ var Piece = /** @class */ (function () {
         this.type = type;
         this.color = color;
         this.location = location;
-        this.moveIfPossible(location);
         this.initializePiece(location);
     }
-    Piece.prototype.possibilities = function () { };
     Piece.prototype.moveIfPossible = function (whereToPlace) {
-        var currentIndex = logic_2.getAreaArrayIndex(this.location);
-        logic_3.AREASARRAY[currentIndex].deletePiece();
-        this.location = whereToPlace;
-        var index = logic_2.getAreaArrayIndex(whereToPlace);
-        logic_3.AREASARRAY[index].deletePiece();
-        logic_3.AREASARRAY[index].putPieceHere(this);
-        var stringCoordinates = logic_1.changeArrayCoordinatesToString(whereToPlace);
-        var querySquare = document.querySelector('.' + stringCoordinates);
-        querySquare.innerText = this.type;
+        this.checkPossibleMoves();
+        console.log(this.possibleLocations, 'locations');
+        if (this.possibleLocations.findIndex(function (e) {
+            console.log('e', e);
+            return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
+        }) != -1) {
+            var currentIndex = logic_2.getAreaArrayIndex(this.location);
+            logic_3.AREASARRAY[currentIndex].deletePiece();
+            this.location = whereToPlace;
+            var index = logic_2.getAreaArrayIndex(whereToPlace);
+            logic_3.AREASARRAY[index].deletePiece();
+            logic_3.AREASARRAY[index].putPieceHere(this);
+            var stringCoordinates = logic_1.changeArrayCoordinatesToString(whereToPlace);
+            var querySquare = document.querySelector('.' + stringCoordinates);
+            querySquare.innerText = this.type;
+        }
     };
     return Piece;
 }());

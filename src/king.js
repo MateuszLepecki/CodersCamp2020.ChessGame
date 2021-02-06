@@ -26,6 +26,8 @@ var King = /** @class */ (function (_super) {
         _this = _super.call(this, 'king', color, location) || this;
         return _this;
     }
+    King.prototype.checkPossibleMoves = function () {
+    };
     return King;
 }(piece_1.Piece));
 exports.King = King;

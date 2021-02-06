@@ -20,6 +20,8 @@ var Knight = /** @class */ (function (_super) {
     function Knight(color, location) {
         return _super.call(this, 'knight', color, location) || this;
     }
+    Knight.prototype.checkPossibleMoves = function () {
+    };
     return Knight;
 }(piece_1.Piece));
 exports.Knight = Knight;

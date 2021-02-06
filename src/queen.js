@@ -26,6 +26,8 @@ var Queen = /** @class */ (function (_super) {
         _this = _super.call(this, 'queen', color, location) || this;
         return _this;
     }
+    Queen.prototype.checkPossibleMoves = function () {
+    };
     return Queen;
 }(piece_1.Piece));
 exports.Queen = Queen;

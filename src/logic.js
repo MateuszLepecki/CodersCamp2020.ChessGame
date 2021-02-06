@@ -26,7 +26,7 @@ var Area = /** @class */ (function () {
         this.areaCoordinates = [-1, -1];
         this.areaCoordinates[0] = row;
         this.areaCoordinates[1] = column;
-        this.piece = {};
+        this.piece = 0;
     }
     Area.prototype.putPieceHere = function (newPiece) {
         this.piece = newPiece;
