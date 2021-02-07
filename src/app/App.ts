@@ -1,8 +1,14 @@
-import { createTimers } from './timer';
+import { chessboard } from '../chessboard';
+import { listenDOMchessboard } from '../logic';
+import { createBoardArray } from '../logic';
+export async function App ({})  {
 
-export const gameSettings = {
-   choosenTime : 4, 
-  };
-export const App = ({}) => {
-	createTimers();
+	await chessboard();
+
+	createBoardArray();
+
+	listenDOMchessboard();
+
+	
 };
+
