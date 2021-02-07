@@ -1,8 +1,8 @@
-import { Piece, coordinates } from './piece';
+import { Piece, coordinates } from './Piece';
 import { getAreaArrayIndex } from './logic';
 import { AREASARRAY } from './logic';
 
-export class Rock extends Piece {
+export class Rook extends Piece {
     constructor(color: string, location: coordinates) {
         super('rock', color, location);
     }

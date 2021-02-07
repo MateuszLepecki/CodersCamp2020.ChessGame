@@ -1,12 +1,12 @@
 export {};
-import { coordinates } from './piece';
-import { Piece } from './piece';
-import { King } from './king';
-import { Queen } from './queen';
-import { Rock } from './rock';
-import { Bishop } from './bishop';
-import { Pawn } from './pawn';
-import { Knight } from './knight';
+import { coordinates } from './Piece';
+import { Piece } from './Piece';
+import { King } from './King';
+import { Queen } from './Queen';
+import { Rook } from './Rook';
+import { Bishop } from './Bishop';
+import { Pawn } from './Pawn';
+import { Knight } from './Knight';
 
 export const AREASARRAY: Area[] = [];
 const BOARD = document.querySelector('.board')! as HTMLElement;
@@ -53,33 +53,31 @@ export const createBoardArray = () => {
 };
 
 const insertPieces = () => {
-    setTimeout(() => {
-        let kingW = new King('white');
-        let kingB = new King('black');
-        let queenW = new Queen('white');
-        let queenB = new Queen('black');
+    let kingW = new King('white');
+    let kingB = new King('black');
+    let queenW = new Queen('white');
+    let queenB = new Queen('black');
 
-        let rockW1 = new Rock('white', [1, 1]);
-        let rockW2 = new Rock('white', [8, 1]);
-        let rockB1 = new Rock('black', [1, 8]);
-        let rockB2 = new Rock('black', [8, 8]);
+    let rockW1 = new Rook('white', [1, 1]);
+    let rockW2 = new Rook('white', [8, 1]);
+    let rockB1 = new Rook('black', [1, 8]);
+    let rockB2 = new Rook('black', [8, 8]);
 
-        let bishopW1 = new Bishop('white', [3, 1]);
-        let bishopW2 = new Bishop('white', [6, 1]);
-        let bishopB1 = new Bishop('black', [3, 8]);
-        let bishopB2 = new Bishop('black', [6, 8]);
+    let bishopW1 = new Bishop('white', [3, 1]);
+    let bishopW2 = new Bishop('white', [6, 1]);
+    let bishopB1 = new Bishop('black', [3, 8]);
+    let bishopB2 = new Bishop('black', [6, 8]);
 
-        let knightW1 = new Knight('white', [2, 1]);
-        let knightW2 = new Knight('white', [7, 1]);
-        let knightB1 = new Knight('black', [2, 8]);
-        let knightB2 = new Knight('black', [7, 8]);
+    let knightW1 = new Knight('white', [2, 1]);
+    let knightW2 = new Knight('white', [7, 1]);
+    let knightB1 = new Knight('black', [2, 8]);
+    let knightB2 = new Knight('black', [7, 8]);
 
-        for (let i = 1; i < 9; i++) {
-            let pawnW = new Pawn('white', [i, 2]);
-            let pawnB = new Pawn('black', [i, 7]);
-        }
-        console.table(AREASARRAY);
-    }, 1000);
+    for (let i = 1; i < 9; i++) {
+        let pawnW = new Pawn('white', [i, 2]);
+        let pawnB = new Pawn('black', [i, 7]);
+    }
+    console.table(AREASARRAY);
 };
 
 export const changeArrayCoordinatesToString = (position: coordinates): string => {

@@ -23,6 +23,7 @@ outerBoard.appendChild(letters);
 outerBoard.appendChild(board);
 
 export function chessboard() {
+
     function getBoard() {
         for (let i = 8; i >= 1; i--) {
             let row = document.createElement('div');

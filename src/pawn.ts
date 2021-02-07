@@ -1,4 +1,4 @@
-import { Piece, coordinates } from './piece';
+import { Piece, coordinates } from './Piece';
 import { getAreaArrayIndex } from './logic';
 import { AREASARRAY } from './logic';
 
@@ -24,7 +24,6 @@ export class Pawn extends Piece {
 
             if (PieceOnWay instanceof Piece && PieceOnWay.color == this.color) continue;
             else if ((i === 0 || i === 2) && PieceOnWay instanceof Piece && PieceOnWay.color !== this.color) {
-                console.log('i', i, '1 else');
                 this.possibleLocations.push(checkingPosition);
                 continue;
             } else if (
@@ -32,7 +31,6 @@ export class Pawn extends Piece {
                 i === 2 ||
                 (i === 1 && PieceOnWay instanceof Piece && PieceOnWay.color !== this.color)
             ) {
-                console.log('i', i, '2 else');
                 continue;
             }
 

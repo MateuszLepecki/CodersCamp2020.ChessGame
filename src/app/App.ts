@@ -1,12 +1,14 @@
 import { chessboard } from '../chessboard';
 import { listenDOMchessboard } from '../logic';
 import { createBoardArray } from '../logic';
-export const App = ({}) => {
+export async function App ({})  {
 
-	chessboard();
+	await chessboard();
 
 	createBoardArray();
+
 	listenDOMchessboard();
+
 	
 };
 
