@@ -1,5 +1,14 @@
-export const App = ({}) => {
-	console.log('everything is OK');
-	console.log('everything is ee');
-	console.log('everhing is Oe3eK');
+import { chessboard } from '../chessboard';
+import { listenDOMchessboard } from '../logic';
+import { createBoardArray } from '../logic';
+export async function App ({})  {
+
+	await chessboard();
+
+	createBoardArray();
+
+	listenDOMchessboard();
+
+	
 };
+
