@@ -8,6 +8,7 @@ import { Bishop } from './Bishop';
 import { Pawn } from './Pawn';
 import { Knight } from './Knight';
 
+
 export const AREASARRAY: Area[] = [];
 const BOARD = document.querySelector('.board')! as HTMLElement;
 

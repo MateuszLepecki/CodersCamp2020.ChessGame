@@ -2,6 +2,7 @@ export type coordinates = [number, number];
 import { changeArrayCoordinatesToString } from './logic';
 import { getAreaArrayIndex } from './logic';
 import { AREASARRAY } from './logic';
+import { switchTimers, whichColorTurn } from './app/timer';
 
 export abstract class Piece {
     type: string = 'noneType';
@@ -9,21 +10,24 @@ export abstract class Piece {
     location: coordinates = [-1, -1];
     possibleLocations: coordinates[] = [];
     moveIfPossible(whereToPlace: coordinates): void {
-        this.checkPossibleMoves();
-        if (
-            this.possibleLocations.findIndex((e) => {
-                return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
-            }) != -1
-        ) {
-            let currentIndex = getAreaArrayIndex(this.location);
-            AREASARRAY[currentIndex].deletePiece();
-            this.location = whereToPlace;
-            let index = getAreaArrayIndex(whereToPlace);
-            AREASARRAY[index].deletePiece();
-            AREASARRAY[index].putPieceHere(this);
-            const stringCoordinates = changeArrayCoordinatesToString(whereToPlace);
-            const querySquare = document.querySelector('.' + stringCoordinates)! as HTMLElement;
-            querySquare.innerText = this.type;
+        if (this.color == whichColorTurn()) {
+            this.checkPossibleMoves();
+            if (
+                this.possibleLocations.findIndex((e) => {
+                    return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
+                }) != -1
+            ) {
+                let currentIndex = getAreaArrayIndex(this.location);
+                AREASARRAY[currentIndex].deletePiece();
+                this.location = whereToPlace;
+                let index = getAreaArrayIndex(whereToPlace);
+                AREASARRAY[index].deletePiece();
+                AREASARRAY[index].putPieceHere(this);
+                const stringCoordinates = changeArrayCoordinatesToString(whereToPlace);
+                const querySquare = document.querySelector('.' + stringCoordinates)! as HTMLElement;
+                querySquare.innerText = this.type;
+                switchTimers();
+            }
         }
     }
     initializePiece = (place: coordinates) => {
