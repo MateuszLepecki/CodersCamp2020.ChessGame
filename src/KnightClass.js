@@ -13,49 +13,43 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.King = void 0;
-var Piece_1 = require("./Piece");
+exports.Knight = void 0;
+var PieceClass_1 = require("./PieceClass");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
-var King = /** @class */ (function (_super) {
-    __extends(King, _super);
-    function King(color, location) {
-        var _this = this;
-        if (color == 'white')
-            location = [5, 1];
-        else
-            location = [5, 8];
-        _this = _super.call(this, 'king', color, location) || this;
-        return _this;
+var Knight = /** @class */ (function (_super) {
+    __extends(Knight, _super);
+    function Knight(color, location) {
+        return _super.call(this, 'knight', color, location) || this;
     }
-    King.prototype.checkPossibleMoves = function () {
+    Knight.prototype.checkPossibleMoves = function () {
         this.possibleLocations = [];
         for (var i = 0; i < 8; i++) {
             var dir = [0, 0];
             switch (i) {
                 case 0:
-                    dir = [1, 0];
+                    dir = [2, 1];
                     break;
                 case 1:
-                    dir = [-1, 0];
+                    dir = [2, -1];
                     break;
                 case 2:
-                    dir = [0, 1];
+                    dir = [-2, 1];
                     break;
                 case 3:
-                    dir = [0, -1];
+                    dir = [-2, -1];
                     break;
                 case 4:
-                    dir = [1, 1];
+                    dir = [1, 2];
                     break;
                 case 5:
-                    dir = [-1, 1];
+                    dir = [-1, 2];
                     break;
                 case 6:
-                    dir = [1, -1];
+                    dir = [1, -2];
                     break;
                 case 7:
-                    dir = [-1, -1];
+                    dir = [-1, -2];
                     break;
             }
             var checkingPosition = [this.location[0] + dir[0], this.location[1] + dir[1]];
@@ -65,15 +59,15 @@ var King = /** @class */ (function (_super) {
                 checkingPosition[1] > 8)
                 continue;
             var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-            if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color == this.color)
+            if (PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color == this.color)
                 continue;
-            else if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color) {
+            else if (PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color !== this.color) {
                 this.possibleLocations.push(checkingPosition);
                 continue;
             }
             this.possibleLocations.push(checkingPosition);
         }
     };
-    return King;
-}(Piece_1.Piece));
-exports.King = King;
+    return Knight;
+}(PieceClass_1.Piece));
+exports.Knight = Knight;

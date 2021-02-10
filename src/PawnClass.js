@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pawn = void 0;
-var Piece_1 = require("./Piece");
+var PieceClass_1 = require("./PieceClass");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
 var Pawn = /** @class */ (function (_super) {
@@ -37,20 +37,20 @@ var Pawn = /** @class */ (function (_super) {
                 checkingPosition[1] > 8)
                 continue;
             var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-            if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color == this.color)
+            if (PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color == this.color)
                 continue;
-            else if ((i === 0 || i === 2) && PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color) {
+            else if ((i === 0 || i === 2) && PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color !== this.color) {
                 this.possibleLocations.push(checkingPosition);
                 continue;
             }
             else if (i === 0 ||
                 i === 2 ||
-                (i === 1 && PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color)) {
+                (i === 1 && PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color !== this.color)) {
                 continue;
             }
             this.possibleLocations.push(checkingPosition);
         }
     };
     return Pawn;
-}(Piece_1.Piece));
+}(PieceClass_1.Piece));
 exports.Pawn = Pawn;

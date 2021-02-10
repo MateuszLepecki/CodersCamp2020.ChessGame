@@ -1,12 +1,12 @@
 export {};
-import { coordinates } from './Piece';
-import { Piece } from './Piece';
-import { King } from './King';
-import { Queen } from './Queen';
-import { Rook } from './Rook';
-import { Bishop } from './Bishop';
-import { Pawn } from './Pawn';
-import { Knight } from './Knight';
+import { coordinates } from './PieceClass';
+import { Piece } from './PieceClass';
+import { King } from './KingClass';
+import { Queen } from './QueenClass';
+import { Rook } from './RookClass';
+import { Bishop } from './BishopClass';
+import { Pawn } from './PawnClass';
+import { Knight } from './KnightClass';
 
 
 export const AREASARRAY: Area[] = [];

@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Rook = void 0;
-var Piece_1 = require("./Piece");
+var PieceClass_1 = require("./PieceClass");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
 var Rook = /** @class */ (function (_super) {
@@ -48,9 +48,9 @@ var Rook = /** @class */ (function (_super) {
                     checkingPosition[1] > 8)
                     break;
                 var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-                if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color == this.color)
+                if (PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color == this.color)
                     break;
-                else if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color) {
+                else if (PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color !== this.color) {
                     this.possibleLocations.push(checkingPosition);
                     break;
                 }
@@ -59,5 +59,5 @@ var Rook = /** @class */ (function (_super) {
         }
     };
     return Rook;
-}(Piece_1.Piece));
+}(PieceClass_1.Piece));
 exports.Rook = Rook;

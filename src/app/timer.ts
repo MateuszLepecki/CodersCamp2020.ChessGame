@@ -64,7 +64,6 @@ export const createTimers = (): void => {
     Timers[0] = new Timer(gameSettings.choosenTime, 'white');
     Timers[1] = new Timer(gameSettings.choosenTime, 'black');
     Timers[0].startCounting();
-    console.log('create timers2');
     insertTimerIntoDOM();
     updateDOMTimer();
 };
