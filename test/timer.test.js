@@ -22,23 +22,20 @@ describe('timer object constructor and methods', function () {
         expect(timer.minutes).toBe(30);
         expect(timer.seconds).toBe(0);
         expect(timer.stopped).toBe(true);
-        expect(timer.player).toBe('444');
+        expect(timer.player).toBe('player');
     });
     var timer1 = new timer_2.Timer(0, 'player');
     test('create Timer object with initial time 0', function () {
         expect(timer1.minutes).toBe(0);
         expect(timer1.seconds).toBe(0);
-        expect(timer1.stopped).toBe(true);
     });
     test('startCounting', function () {
         jest.useFakeTimers();
         timer.startCounting();
-        jest.advanceTimersByTime(90000);
-        var min = timer.minutes;
-        var sec = timer.seconds;
+        jest.advanceTimersByTime(93000);
         expect(timer.stopped).toBe(false);
-        expect(min).toBe(28);
-        expect(sec).toBe(30);
+        expect(timer.minutes).toBe(28);
+        expect(timer.seconds).toBe(27);
         expect(setInterval).toHaveBeenCalledTimes(1);
     });
     test('stopCounting', function () {
@@ -47,10 +44,27 @@ describe('timer object constructor and methods', function () {
     });
 });
 describe('timer change60secondsTo1Minute method ', function () {
-    var timer = new timer_2.Timer(30, 'player');
+    var timer2 = new timer_2.Timer(30, 'player');
     test('change60secondsTo1Minute 30 min to 29:60', function () {
-        timer.change60secondsTo1Minute();
-        expect(timer.minutes).toBe(29);
-        expect(timer.seconds).toBe(60);
+        timer2.change60secondsTo1Minute();
+        expect(timer2.minutes).toBe(29);
+        expect(timer2.seconds).toBe(60);
     });
 });
+// describe('createTimers', () => {
+//     test('call updateDOMTimer', () => {
+//         createTimers();
+//         const MAIN = document.createElement('div');
+//         const newElement = jest.fn(); 
+//         expect(newElement).toHaveBeenCalled();
+//     });
+// });
+// describe('createDOMElement', () => {
+//     test('call updateDOMTimer', () => {
+//         const MAIN:HTMLElement = document.createElement('div');
+//         jest.spyOn(MAIN, 'appendChild');
+//        const createDOMElement = jest.fn();
+//         createDOMElement('div','className',MAIN)
+//         expect(createDOMElement).toHaveReturned()
+//     });
+// });

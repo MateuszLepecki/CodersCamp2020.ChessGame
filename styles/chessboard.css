@@ -10,8 +10,9 @@ body {
 }
 .img {
     position: absolute;
-    left: 50%;
+    margin: 0 auto;
     top: 5%;
+    width: 10%;
 }
 #main-wrap {
     height: 100vh;
