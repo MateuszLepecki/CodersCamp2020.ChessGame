@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 exports.chessboard = void 0;
+// import image from './../styles/photos/chess_logo_logo.svg';
 var main = document.getElementById('main-wrap');
 var board = document.createElement('div');
 board.classList.add('board');
@@ -25,7 +26,6 @@ letters.classList.add('letters');
 outerBoard.appendChild(letters);
 outerBoard.appendChild(board);
 function chessboard() {
-    // function getBoard() { 
     var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     var secArr = ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
     for (var i = 8; i >= 1; i--) {
