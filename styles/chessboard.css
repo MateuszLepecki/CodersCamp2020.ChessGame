@@ -26,7 +26,7 @@ body {
     top: 20px;
     margin-right: 1vw;
     width: 10px;
-    height: 520px;
+    height: 480px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -38,16 +38,15 @@ body {
     color: white;
 }
 .letters {
-    width: 480px;
+    width: 440px;
     height: 40px;
     display: flex;
     justify-content: space-around;
 }
 .row {
     display: flex;
-    width: 480px;
-    height: 56px;
-    
+    width: 440px;
+    height: 50px;
     border: 3px solid #191919;
 }
 .firstColor {
@@ -72,7 +71,7 @@ body {
     height: 100vh;
 }
 
-@media (max-width: 530px) {
+@media (max-width: 550px) {
     .row {
         width: 400px;
         height: 50px;
@@ -96,7 +95,7 @@ body {
         height: 340px;
     }
 }
-@media (max-width: 350px) {
+@media (max-width: 380px) {
     .row {
         width: 280px;
         height: 35px;
@@ -106,5 +105,10 @@ body {
     }
     .numbers {
         height: 300px;
+    }
+    .img {
+        left: 25%;
+        width: 40vw;
+        height: auto;
     }
 }
