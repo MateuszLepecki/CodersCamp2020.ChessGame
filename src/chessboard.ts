@@ -1,10 +1,10 @@
-// import image from './../styles/photos/chess_logo_logo.svg';
+import image from './../styles/photos/chess_logo_logo.svg';
 const main = document.getElementById('main-wrap');
 const board = document.createElement('div');
 board.classList.add('board');
 const img = document.createElement('img');
 img.classList.add('img');
-img.src = './../styles/photos/chess_logo_logo.svg';
+img.src = image;
 const outerBoard = document.createElement('div');
 outerBoard.classList.add('outerBoard');
 const numbers = document.createElement('div');
@@ -42,9 +42,11 @@ export function chessboard() {
             }
             square.classList.add('square');
             if (j % 2 === 0) {
-                square.style.backgroundColor = '#6C1A31';
+                square.classList.add('firstColor');
+                // style.backgroundColor = '#6C1A31';
             } else {
-                square.style.backgroundColor = '#D67E03';
+                square.classList.add('secondColor');
+                // square.style.backgroundColor = '#D67E03';
             }
             row.appendChild(square);
         }
