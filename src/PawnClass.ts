@@ -36,5 +36,14 @@ export class Pawn extends Piece {
 
             this.possibleLocations.push(checkingPosition);
         }
+        if (this.alreadyMoved == false) {
+            if (this.color == 'white') dir = 2;
+            else dir = -2;
+            let checkingPosition: coordinates = [this.location[0], this.location[1] + dir];
+            let PieceOnWay = AREASARRAY[getAreaArrayIndex(checkingPosition)].piece;
+            if (PieceOnWay === 0) {
+                this.possibleLocations.push(checkingPosition);
+            }
+        }
     }
 }

@@ -50,6 +50,17 @@ var Pawn = /** @class */ (function (_super) {
             }
             this.possibleLocations.push(checkingPosition);
         }
+        if (this.alreadyMoved == false) {
+            if (this.color == 'white')
+                dir = 2;
+            else
+                dir = -2;
+            var checkingPosition = [this.location[0], this.location[1] + dir];
+            var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
+            if (PieceOnWay === 0) {
+                this.possibleLocations.push(checkingPosition);
+            }
+        }
     };
     return Pawn;
 }(PieceClass_1.Piece));

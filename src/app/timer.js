@@ -11,6 +11,7 @@ exports.DOMTimers = [];
 var Timers = [];
 var Timer = /** @class */ (function () {
     function Timer(initialTime, player) {
+        this.endOftime = false;
         this.minutes = initialTime;
         this.seconds = 0;
         this.stopped = true;
@@ -26,7 +27,7 @@ var Timer = /** @class */ (function () {
             _this.seconds--;
             // this.showRemainingTime();
             if (_this.seconds === 0 && _this.minutes === 0) {
-                _this.endOfTime();
+                _this.endOfTimeMethod();
                 clearInterval(interval);
             }
         }, 1000);
@@ -43,8 +44,13 @@ var Timer = /** @class */ (function () {
     // showRemainingTime(): void {
     //     console.log(`${this.color} - time left: ${this.minutes}:${this.seconds}`);
     // }
-    Timer.prototype.endOfTime = function () {
+    Timer.prototype.endOfTimeMethod = function () {
+        this.endOftime = true;
         console.log('End of time - you lose');
+        if (MAIN instanceof HTMLElement) {
+            var youLoseDiv = exports.createDOMElement(DIV_ELEMENT, 'youLose', MAIN);
+            youLoseDiv.innerText = "YOU LOSE!";
+        }
     };
     return Timer;
 }());
@@ -52,6 +58,8 @@ exports.Timer = Timer;
 var whichColorTurn = function () {
     if (Timers[0].stopped === false)
         return 'white';
+    if (Timers[0].endOftime === true || Timers[1].endOftime === true)
+        return 'endOfTime';
     else
         return 'black';
 };
@@ -60,7 +68,6 @@ var createTimers = function () {
     Timers[0] = new Timer(App_1.gameSettings.choosenTime, 'white');
     Timers[1] = new Timer(App_1.gameSettings.choosenTime, 'black');
     Timers[0].startCounting();
-    console.log('create timers2');
     exports.insertTimerIntoDOM();
     exports.updateDOMTimer();
 };

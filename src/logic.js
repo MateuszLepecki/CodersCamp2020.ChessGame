@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAreaArrayIndex = exports.listenDOMchessboard = exports.changeArrayCoordinatesToString = exports.createBoardArray = exports.AREASARRAY = void 0;
+exports.deleteHighlightedSquares = exports.getAreaArrayIndex = exports.listenDOMchessboard = exports.changeArrayCoordinatesToString = exports.createBoardArray = exports.AREASARRAY = void 0;
 var PieceClass_1 = require("./PieceClass");
 var KingClass_1 = require("./KingClass");
 var QueenClass_1 = require("./QueenClass");
@@ -86,13 +86,17 @@ var changeStringCoordinatesToArray = function (position) {
     return resultArray;
 };
 var listenSelection = function (e) {
-    var target = e.target; // WHAT WILL BE THE PROPER TYPE ??
-    var stringCoordinates = target.classList[0];
-    var arr = changeStringCoordinatesToArray(stringCoordinates);
-    var index = exports.getAreaArrayIndex(arr);
-    if (exports.AREASARRAY[index].piece instanceof PieceClass_1.Piece) {
-        selectPiece(arr);
-        BOARD.removeEventListener('click', listenSelection);
+    var target;
+    if (e.target instanceof HTMLElement) {
+        target = e.target;
+        var stringCoordinates = target.classList[0];
+        var arr = changeStringCoordinatesToArray(stringCoordinates);
+        var index = exports.getAreaArrayIndex(arr);
+        exports.deleteHighlightedSquares();
+        if (exports.AREASARRAY[index].piece instanceof PieceClass_1.Piece) {
+            selectPiece(arr);
+            BOARD.removeEventListener('click', listenSelection);
+        }
     }
 };
 var listenDOMchessboard = function () {
@@ -103,13 +107,18 @@ var selectPiece = function (position) {
     BOARD.removeEventListener('click', listenSelection);
     var index = exports.getAreaArrayIndex(position);
     var currentPiece = exports.AREASARRAY[index].piece;
+    currentPiece.checkPossibleMoves();
+    currentPiece.highlightPossibilities();
     var listenNewPosition = function (e) {
-        var target = e.target; // WHAT WILL BE THE PROPER TYPE ??
-        var stringCoordinates = target.classList[0];
-        var arr = changeStringCoordinatesToArray(stringCoordinates);
-        currentPiece.moveIfPossible(arr);
-        BOARD.removeEventListener('click', listenNewPosition);
-        BOARD.addEventListener('click', listenSelection);
+        var target;
+        if (e.target instanceof HTMLElement) {
+            target = e.target;
+            var stringCoordinates = target.classList[0];
+            var arr = changeStringCoordinatesToArray(stringCoordinates);
+            currentPiece.moveIfPossible(arr);
+            BOARD.removeEventListener('click', listenNewPosition);
+            BOARD.addEventListener('click', listenSelection);
+        }
     };
     if (currentPiece instanceof PieceClass_1.Piece) {
         BOARD.addEventListener('click', listenNewPosition);
@@ -125,3 +134,10 @@ var getAreaArrayIndex = function (coordinates) {
     return index;
 };
 exports.getAreaArrayIndex = getAreaArrayIndex;
+var deleteHighlightedSquares = function () {
+    var highlighted = document.querySelectorAll('.possibileMoves');
+    highlighted.forEach(function (el) {
+        el.classList.remove('possibileMoves');
+    });
+};
+exports.deleteHighlightedSquares = deleteHighlightedSquares;

@@ -42,7 +42,7 @@ var logic_1 = require("../logic");
 var logic_2 = require("../logic");
 var timer_1 = require("./timer");
 exports.gameSettings = {
-    choosenTime: 4,
+    choosenTime: 1,
 };
 function App(_a) {
     return __awaiter(this, void 0, void 0, function () {

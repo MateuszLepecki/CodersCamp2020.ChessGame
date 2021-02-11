@@ -1,7 +1,5 @@
 export type coordinates = [number, number];
-import { changeArrayCoordinatesToString } from './logic';
-import { getAreaArrayIndex } from './logic';
-import { AREASARRAY } from './logic';
+import { getAreaArrayIndex, AREASARRAY, deleteHighlightedSquares, changeArrayCoordinatesToString } from './logic';
 import { switchTimers, whichColorTurn } from './app/timer';
 
 export abstract class Piece {
@@ -9,9 +7,18 @@ export abstract class Piece {
     color: string = 'noneColor';
     location: coordinates = [-1, -1];
     possibleLocations: coordinates[] = [];
+    alreadyMoved: boolean = false;
+
+    constructor(type: string, color: string, location: coordinates) {
+        this.type = type;
+        this.color = color;
+        this.location = location;
+        this.initializePiece(location);
+    }
+
     moveIfPossible(whereToPlace: coordinates): void {
         if (this.color == whichColorTurn()) {
-            this.checkPossibleMoves();
+            // this.checkPossibleMoves();
             if (
                 this.possibleLocations.findIndex((e) => {
                     return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
@@ -26,6 +33,8 @@ export abstract class Piece {
                 const stringCoordinates = changeArrayCoordinatesToString(whereToPlace);
                 const querySquare = document.querySelector('.' + stringCoordinates)! as HTMLElement;
                 querySquare.innerText = this.type;
+                this.alreadyMoved = true;
+                deleteHighlightedSquares();
                 switchTimers();
             }
         }
@@ -39,11 +48,13 @@ export abstract class Piece {
         const querySquare = document.querySelector('.' + stringCoordinates)! as HTMLElement;
         querySquare.innerText = this.type;
     };
-    constructor(type: string, color: string, location: coordinates) {
-        this.type = type;
-        this.color = color;
-        this.location = location;
-        this.initializePiece(location);
-    }
+
+    highlightPossibilities = (): void => {
+        this.possibleLocations.forEach((e) => {
+            const possibleSquare = document.querySelector('.' + changeArrayCoordinatesToString(e));
+            possibleSquare?.classList.add('possibileMoves');
+        });
+    };
+
     abstract checkPossibleMoves(): void;
 }

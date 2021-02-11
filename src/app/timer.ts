@@ -14,9 +14,9 @@ export class Timer {
     seconds: number;
     stopped: boolean;
     player: string;
+    endOftime: boolean = false;
 
     constructor(initialTime: number, player: string) {
-        
         this.minutes = initialTime;
         this.seconds = 0;
         this.stopped = true;
@@ -31,7 +31,7 @@ export class Timer {
             this.seconds--;
             // this.showRemainingTime();
             if (this.seconds === 0 && this.minutes === 0) {
-                this.endOfTime();
+                this.endOfTimeMethod();
                 clearInterval(interval);
             }
         }, 1000);
@@ -48,19 +48,23 @@ export class Timer {
     // showRemainingTime(): void {
     //     console.log(`${this.color} - time left: ${this.minutes}:${this.seconds}`);
     // }
-    endOfTime(): void {
+    endOfTimeMethod(): void {
+        this.endOftime = true;
         console.log('End of time - you lose');
+        if (MAIN instanceof HTMLElement) {
+            const youLoseDiv = createDOMElement(DIV_ELEMENT, 'youLose', MAIN);
+            youLoseDiv.innerText = "YOU LOSE!";
+        }
     }
 }
 
-
 export const whichColorTurn = (): string => {
     if (Timers[0].stopped === false) return 'white';
+    if (Timers[0].endOftime === true || Timers[1].endOftime === true) return 'endOfTime';
     else return 'black';
 };
 
 export const createTimers = (): void => {
-    
     Timers[0] = new Timer(gameSettings.choosenTime, 'white');
     Timers[1] = new Timer(gameSettings.choosenTime, 'black');
     Timers[0].startCounting();

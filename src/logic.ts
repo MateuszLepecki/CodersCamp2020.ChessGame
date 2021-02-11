@@ -8,7 +8,6 @@ import { Bishop } from './BishopClass';
 import { Pawn } from './PawnClass';
 import { Knight } from './KnightClass';
 
-
 export const AREASARRAY: Area[] = [];
 const BOARD = document.querySelector('.board')! as HTMLElement;
 
@@ -95,13 +94,19 @@ const changeStringCoordinatesToArray = (position: string): coordinates => {
     return resultArray;
 };
 const listenSelection = (e: Event) => {
-    let target: any = e.target!; // WHAT WILL BE THE PROPER TYPE ??
-    const stringCoordinates: string = target.classList[0];
-    let arr = changeStringCoordinatesToArray(stringCoordinates);
-    let index = getAreaArrayIndex(arr);
-    if (AREASARRAY[index].piece instanceof Piece) {
-        selectPiece(arr);
-        BOARD.removeEventListener('click', listenSelection);
+    let target;
+    if (e.target instanceof HTMLElement) {
+        target = e.target;
+        const stringCoordinates: string = target.classList[0];
+        let arr = changeStringCoordinatesToArray(stringCoordinates);
+        let index = getAreaArrayIndex(arr);
+        deleteHighlightedSquares();
+
+
+        if (AREASARRAY[index].piece instanceof Piece) {
+            selectPiece(arr);
+            BOARD.removeEventListener('click', listenSelection);
+        }
     }
 };
 export const listenDOMchessboard = () => {
@@ -111,13 +116,18 @@ const selectPiece = (position: coordinates) => {
     BOARD.removeEventListener('click', listenSelection);
     let index = getAreaArrayIndex(position);
     const currentPiece = AREASARRAY[index].piece! as Piece;
+    currentPiece.checkPossibleMoves();
+    currentPiece.highlightPossibilities();
     const listenNewPosition = (e: Event) => {
-        let target: any = e.target!; // WHAT WILL BE THE PROPER TYPE ??
-        const stringCoordinates: string = target.classList[0];
-        let arr = changeStringCoordinatesToArray(stringCoordinates);
-        currentPiece.moveIfPossible(arr);
-        BOARD.removeEventListener('click', listenNewPosition);
-        BOARD.addEventListener('click', listenSelection);
+        let target;
+        if (e.target instanceof HTMLElement) {
+            target = e.target;
+            const stringCoordinates: string = target.classList[0];
+            let arr = changeStringCoordinatesToArray(stringCoordinates);
+            currentPiece.moveIfPossible(arr);
+            BOARD.removeEventListener('click', listenNewPosition);
+            BOARD.addEventListener('click', listenSelection);
+        }
     };
     if (currentPiece instanceof Piece) {
         BOARD.addEventListener('click', listenNewPosition);
@@ -130,3 +140,11 @@ export const getAreaArrayIndex = (coordinates: coordinates): number => {
     });
     return index;
 };
+
+export const deleteHighlightedSquares=():void=>
+{
+    const highlighted = document.querySelectorAll('.possibileMoves'); 
+        highlighted.forEach((el)=>{
+            el.classList.remove('possibileMoves');
+        });
+}

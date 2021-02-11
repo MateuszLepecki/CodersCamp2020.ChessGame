@@ -1,0 +1,8 @@
+.youLose{
+    position:fixed;
+    right:50%;
+    top:50%;
+    border: 3px solid red;
+    background-color: white;
+}
+
