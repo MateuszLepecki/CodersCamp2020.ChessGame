@@ -1,10 +1,11 @@
 export type coordinates = [number, number];
-import { getAreaArrayIndex, AREASARRAY, deleteHighlightedSquares, changeArrayCoordinatesToString } from './logic';
+import { getAreaArrayIndex, AREASARRAY,checkIfchecked, deleteHighlightedSquares, changeArrayCoordinatesToString } from './logic';
 import { switchTimers, whichColorTurn } from './app/timer';
 
 export abstract class Piece {
     type: string = 'noneType';
     color: string = 'noneColor';
+    check:boolean = false;
     location: coordinates = [-1, -1];
     possibleLocations: coordinates[] = [];
     alreadyMoved: boolean = false;
@@ -18,7 +19,6 @@ export abstract class Piece {
 
     moveIfPossible(whereToPlace: coordinates): void {
         if (this.color == whichColorTurn()) {
-            // this.checkPossibleMoves();
             if (
                 this.possibleLocations.findIndex((e) => {
                     return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
@@ -34,6 +34,7 @@ export abstract class Piece {
                 const querySquare = document.querySelector('.' + stringCoordinates)! as HTMLElement;
                 querySquare.innerText = this.type;
                 this.alreadyMoved = true;
+                // checkIfchecked();
                 deleteHighlightedSquares();
                 switchTimers();
             }

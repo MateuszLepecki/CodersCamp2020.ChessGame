@@ -23,6 +23,7 @@ var Pawn = /** @class */ (function (_super) {
         return _super.call(this, 'pawn', color, location) || this;
     }
     Pawn.prototype.checkPossibleMoves = function () {
+        this.check = false;
         this.possibleLocations = [];
         var dir = 0;
         if (this.color == 'white')
@@ -36,16 +37,18 @@ var Pawn = /** @class */ (function (_super) {
                 checkingPosition[1] < 1 ||
                 checkingPosition[1] > 8)
                 continue;
-            var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-            if (PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color == this.color)
+            var pieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
+            if (pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color == this.color)
                 continue;
-            else if ((i === 0 || i === 2) && PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color !== this.color) {
+            else if ((i === 0 || i === 2) && pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color !== this.color) {
+                if (pieceOnWay.type == 'king')
+                    this.check = true;
                 this.possibleLocations.push(checkingPosition);
                 continue;
             }
             else if (i === 0 ||
                 i === 2 ||
-                (i === 1 && PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color !== this.color)) {
+                (i === 1 && pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color !== this.color)) {
                 continue;
             }
             this.possibleLocations.push(checkingPosition);

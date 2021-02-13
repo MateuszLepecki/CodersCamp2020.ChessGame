@@ -7,6 +7,7 @@ export class Pawn extends Piece {
         super('pawn', color, location);
     }
     checkPossibleMoves() {
+        this.check = false;
         this.possibleLocations = [];
         let dir: number = 0;
         if (this.color == 'white') dir = 1;
@@ -20,16 +21,17 @@ export class Pawn extends Piece {
                 checkingPosition[1] > 8
             )
                 continue;
-            let PieceOnWay = AREASARRAY[getAreaArrayIndex(checkingPosition)].piece;
+            let pieceOnWay = AREASARRAY[getAreaArrayIndex(checkingPosition)].piece;
 
-            if (PieceOnWay instanceof Piece && PieceOnWay.color == this.color) continue;
-            else if ((i === 0 || i === 2) && PieceOnWay instanceof Piece && PieceOnWay.color !== this.color) {
+            if (pieceOnWay instanceof Piece && pieceOnWay.color == this.color) continue;
+            else if ((i === 0 || i === 2) && pieceOnWay instanceof Piece && pieceOnWay.color !== this.color) {
+                if (pieceOnWay.type == 'king') this.check = true;
                 this.possibleLocations.push(checkingPosition);
                 continue;
             } else if (
                 i === 0 ||
                 i === 2 ||
-                (i === 1 && PieceOnWay instanceof Piece && PieceOnWay.color !== this.color)
+                (i === 1 && pieceOnWay instanceof Piece && pieceOnWay.color !== this.color)
             ) {
                 continue;
             }

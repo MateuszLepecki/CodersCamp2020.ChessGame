@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateDOMTimer = exports.changeTimeToString = exports.createDOMElement = exports.insertTimerIntoDOM = exports.switchTimers = exports.createTimers = exports.whichColorTurn = exports.Timer = exports.DOMTimers = exports.CANCELTIMER = void 0;
+exports.turnTimerOffFaster = exports.updateDOMTimer = exports.changeTimeToString = exports.createDOMElement = exports.insertTimerIntoDOM = exports.switchTimers = exports.createTimers = exports.whichColorTurn = exports.Timer = exports.DOMTimers = exports.CANCELTIMER = void 0;
 var App_1 = require("./App");
 var MAIN = document.querySelector('#main-wrap');
 var DIV_ELEMENT = 'div';
@@ -58,7 +58,7 @@ exports.Timer = Timer;
 var whichColorTurn = function () {
     if (Timers[0].stopped === false)
         return 'white';
-    if (Timers[0].endOftime === true || Timers[1].endOftime === true)
+    if (Timers[0].endOftime === true || Timers[1].endOftime === true || exports.CANCELTIMER.flag === true)
         return 'endOfTime';
     else
         return 'black';
@@ -131,3 +131,4 @@ exports.updateDOMTimer = updateDOMTimer;
 var turnTimerOffFaster = function () {
     exports.CANCELTIMER.flag = true;
 };
+exports.turnTimerOffFaster = turnTimerOffFaster;

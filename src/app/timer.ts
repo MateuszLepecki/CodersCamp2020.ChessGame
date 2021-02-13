@@ -60,7 +60,7 @@ export class Timer {
 
 export const whichColorTurn = (): string => {
     if (Timers[0].stopped === false) return 'white';
-    if (Timers[0].endOftime === true || Timers[1].endOftime === true) return 'endOfTime';
+    if (Timers[0].endOftime === true || Timers[1].endOftime === true || CANCELTIMER.flag===true) return 'endOfTime';
     else return 'black';
 };
 
@@ -128,6 +128,6 @@ export const updateDOMTimer = () => {
     }, 1000);
 };
 
-const turnTimerOffFaster = () => {
+export const turnTimerOffFaster = () => {
     CANCELTIMER.flag = true;
 };

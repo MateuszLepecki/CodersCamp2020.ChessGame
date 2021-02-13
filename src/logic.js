@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteHighlightedSquares = exports.getAreaArrayIndex = exports.listenDOMchessboard = exports.changeArrayCoordinatesToString = exports.createBoardArray = exports.AREASARRAY = void 0;
+exports.checkIfchecked = exports.deleteHighlightedSquares = exports.getAreaArrayIndex = exports.listenDOMchessboard = exports.changeArrayCoordinatesToString = exports.createBoardArray = exports.CHECK = exports.AREASARRAY = void 0;
 var PieceClass_1 = require("./PieceClass");
 var KingClass_1 = require("./KingClass");
 var QueenClass_1 = require("./QueenClass");
@@ -10,6 +10,8 @@ var PawnClass_1 = require("./PawnClass");
 var KnightClass_1 = require("./KnightClass");
 exports.AREASARRAY = [];
 var BOARD = document.querySelector('.board');
+exports.CHECK = false;
+var kingsIndexes = [];
 var Letters;
 (function (Letters) {
     Letters[Letters["A"] = 0] = "A";
@@ -39,6 +41,7 @@ var Area = /** @class */ (function () {
     return Area;
 }());
 var createBoardArray = function () {
+    exports.AREASARRAY.splice(0, exports.AREASARRAY.length);
     for (var row = 1; row < 9; row++) {
         for (var column = 1; column < 9; column++) {
             var newArea = new Area(row, column);
@@ -116,6 +119,7 @@ var selectPiece = function (position) {
             var stringCoordinates = target.classList[0];
             var arr = changeStringCoordinatesToArray(stringCoordinates);
             currentPiece.moveIfPossible(arr);
+            exports.checkIfchecked();
             BOARD.removeEventListener('click', listenNewPosition);
             BOARD.addEventListener('click', listenSelection);
         }
@@ -141,3 +145,28 @@ var deleteHighlightedSquares = function () {
     });
 };
 exports.deleteHighlightedSquares = deleteHighlightedSquares;
+var checkIfchecked = function () {
+    kingsIndexes = [];
+    exports.AREASARRAY.forEach(function (el, index) {
+        if (el.piece instanceof PieceClass_1.Piece && el.piece.type == 'king') {
+            kingsIndexes.push(index);
+        }
+        if (el.piece instanceof PieceClass_1.Piece && el.piece.type != 'king') {
+            el.piece.checkPossibleMoves();
+            if (el.piece.check === true) {
+                console.log('check');
+                exports.CHECK = true;
+            }
+        }
+    });
+    if (exports.CHECK == true) {
+        kingsIndexes.forEach(function (el, index) {
+            var king = exports.AREASARRAY[kingsIndexes[index]].piece;
+            if (king instanceof KingClass_1.King) {
+                king.checkingIfMate();
+            }
+        });
+    }
+    exports.CHECK = false;
+};
+exports.checkIfchecked = checkIfchecked;

@@ -10,6 +10,8 @@ import { Knight } from './KnightClass';
 
 export const AREASARRAY: Area[] = [];
 const BOARD = document.querySelector('.board')! as HTMLElement;
+export let CHECK = false;
+let kingsIndexes: number[] = [];
 
 enum Letters {
     A,
@@ -43,6 +45,7 @@ class Area {
 }
 
 export const createBoardArray = () => {
+    AREASARRAY.splice(0, AREASARRAY.length);
     for (let row = 1; row < 9; row++) {
         for (let column = 1; column < 9; column++) {
             let newArea = new Area(row, column);
@@ -102,7 +105,6 @@ const listenSelection = (e: Event) => {
         let index = getAreaArrayIndex(arr);
         deleteHighlightedSquares();
 
-
         if (AREASARRAY[index].piece instanceof Piece) {
             selectPiece(arr);
             BOARD.removeEventListener('click', listenSelection);
@@ -125,6 +127,7 @@ const selectPiece = (position: coordinates) => {
             const stringCoordinates: string = target.classList[0];
             let arr = changeStringCoordinatesToArray(stringCoordinates);
             currentPiece.moveIfPossible(arr);
+            checkIfchecked();
             BOARD.removeEventListener('click', listenNewPosition);
             BOARD.addEventListener('click', listenSelection);
         }
@@ -141,10 +144,34 @@ export const getAreaArrayIndex = (coordinates: coordinates): number => {
     return index;
 };
 
-export const deleteHighlightedSquares=():void=>
-{
-    const highlighted = document.querySelectorAll('.possibileMoves'); 
-        highlighted.forEach((el)=>{
-            el.classList.remove('possibileMoves');
+export const deleteHighlightedSquares = (): void => {
+    const highlighted = document.querySelectorAll('.possibileMoves');
+    highlighted.forEach((el) => {
+        el.classList.remove('possibileMoves');
+    });
+};
+
+export const checkIfchecked = () => {
+    kingsIndexes = [];
+    AREASARRAY.forEach((el, index) => {
+        if (el.piece instanceof Piece && el.piece.type == 'king') {
+            kingsIndexes.push(index);
+        }
+        if (el.piece instanceof Piece && el.piece.type != 'king') {
+            el.piece.checkPossibleMoves();
+            if (el.piece.check === true) {
+                console.log('check');
+                CHECK = true;
+            }
+        }
+    });
+    if (CHECK == true) {
+        kingsIndexes.forEach((el, index) => {
+            let king = AREASARRAY[kingsIndexes[index]].piece;
+            if (king instanceof King) {
+                king.checkingIfMate();
+            }
         });
-}
+    }
+    CHECK = false;
+};

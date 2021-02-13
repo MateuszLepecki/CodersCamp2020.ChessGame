@@ -17,6 +17,9 @@ exports.King = void 0;
 var PieceClass_1 = require("./PieceClass");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
+var timer_1 = require("./app/timer");
+var DIV_ELEMENT = 'div';
+var MAIN = document.querySelector('#main-wrap');
 var King = /** @class */ (function (_super) {
     __extends(King, _super);
     function King(color, location) {
@@ -72,6 +75,35 @@ var King = /** @class */ (function (_super) {
                 continue;
             }
             this.possibleLocations.push(checkingPosition);
+        }
+    };
+    King.prototype.checkingIfMate = function () {
+        var _this = this;
+        var checkCouter = 0;
+        this.checkPossibleMoves();
+        this.possibleLocations.forEach(function (kingPossibleLocation) {
+            var enemyCounter = 0;
+            logic_2.AREASARRAY.forEach(function (el) {
+                if (el.piece instanceof PieceClass_1.Piece && el.piece.color != _this.color) {
+                    el.piece.checkPossibleMoves();
+                    el.piece.possibleLocations.forEach(function (enemyPossibleLoaction) {
+                        if (kingPossibleLocation[0] == enemyPossibleLoaction[0] &&
+                            kingPossibleLocation[1] == enemyPossibleLoaction[1]) {
+                            enemyCounter++;
+                            if (enemyCounter == 1)
+                                checkCouter++;
+                        }
+                    });
+                }
+            });
+        });
+        if (checkCouter == this.possibleLocations.length || this.possibleLocations.length == 0) {
+            console.log('checkmate');
+            timer_1.CANCELTIMER.flag = true;
+            if (MAIN instanceof HTMLElement) {
+                var youLoseDiv = timer_1.createDOMElement(DIV_ELEMENT, 'youLose', MAIN);
+                youLoseDiv.innerText = 'YOU LOSE!';
+            }
         }
     };
     return King;

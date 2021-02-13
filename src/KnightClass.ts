@@ -7,6 +7,7 @@ export class Knight extends Piece {
         super('knight', color, location);
     }
     checkPossibleMoves() {
+        this.check = false;
         this.possibleLocations = [];
         for (let i = 0; i < 8; i++) {
             let dir: number[] = [0, 0];
@@ -45,9 +46,10 @@ export class Knight extends Piece {
                 checkingPosition[1] > 8
             )
                 continue;
-            let PieceOnWay = AREASARRAY[getAreaArrayIndex(checkingPosition)].piece;
-            if (PieceOnWay instanceof Piece && PieceOnWay.color == this.color) continue;
-            else if (PieceOnWay instanceof Piece && PieceOnWay.color !== this.color) {
+            let pieceOnWay = AREASARRAY[getAreaArrayIndex(checkingPosition)].piece;
+            if (pieceOnWay instanceof Piece && pieceOnWay.color == this.color) continue;
+            else if (pieceOnWay instanceof Piece && pieceOnWay.color !== this.color) {
+                if (pieceOnWay.type == 'king') this.check = true;
                 this.possibleLocations.push(checkingPosition);
                 continue;
             }

@@ -1,6 +1,10 @@
 import { Piece, coordinates } from './PieceClass';
 import { getAreaArrayIndex } from './logic';
 import { AREASARRAY } from './logic';
+import { CANCELTIMER, createDOMElement } from './app/timer';
+const DIV_ELEMENT = 'div';
+
+const MAIN = document.querySelector('#main-wrap');
 
 export class King extends Piece {
     constructor(color: string, location?: coordinates) {
@@ -54,6 +58,35 @@ export class King extends Piece {
                 continue;
             }
             this.possibleLocations.push(checkingPosition);
+        }
+    }
+    checkingIfMate() {
+        let checkCouter = 0;
+        this.checkPossibleMoves();
+        this.possibleLocations.forEach((kingPossibleLocation) => {
+            let enemyCounter = 0;
+            AREASARRAY.forEach((el) => {
+                if (el.piece instanceof Piece && el.piece.color != this.color) {
+                    el.piece.checkPossibleMoves();
+                    el.piece.possibleLocations.forEach((enemyPossibleLoaction) => {
+                        if (
+                            kingPossibleLocation[0] == enemyPossibleLoaction[0] &&
+                            kingPossibleLocation[1] == enemyPossibleLoaction[1]
+                        ) {
+                            enemyCounter++;
+                            if (enemyCounter == 1) checkCouter++;
+                        }
+                    });
+                }
+            });
+        });
+        if (checkCouter == this.possibleLocations.length || this.possibleLocations.length == 0) {
+            console.log('checkmate');
+            CANCELTIMER.flag = true;
+            if (MAIN instanceof HTMLElement) {
+                const youLoseDiv = createDOMElement(DIV_ELEMENT, 'youLose', MAIN);
+                youLoseDiv.innerText = 'YOU LOSE!';
+            }
         }
     }
 }

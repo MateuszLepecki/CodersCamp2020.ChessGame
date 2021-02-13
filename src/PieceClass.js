@@ -8,6 +8,7 @@ var Piece = /** @class */ (function () {
         var _this = this;
         this.type = 'noneType';
         this.color = 'noneColor';
+        this.check = false;
         this.location = [-1, -1];
         this.possibleLocations = [];
         this.alreadyMoved = false;
@@ -33,7 +34,6 @@ var Piece = /** @class */ (function () {
     }
     Piece.prototype.moveIfPossible = function (whereToPlace) {
         if (this.color == timer_1.whichColorTurn()) {
-            // this.checkPossibleMoves();
             if (this.possibleLocations.findIndex(function (e) {
                 return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
             }) != -1) {
@@ -47,6 +47,7 @@ var Piece = /** @class */ (function () {
                 var querySquare = document.querySelector('.' + stringCoordinates);
                 querySquare.innerText = this.type;
                 this.alreadyMoved = true;
+                // checkIfchecked();
                 logic_1.deleteHighlightedSquares();
                 timer_1.switchTimers();
             }
