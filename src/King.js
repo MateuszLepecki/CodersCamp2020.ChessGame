@@ -17,9 +17,12 @@ exports.King = void 0;
 var Piece_1 = require("./Piece");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
+<<<<<<< Updated upstream
 var timer_1 = require("./app/timer");
 var DIV_ELEMENT = 'div';
 var MAIN = document.querySelector('#main-wrap');
+=======
+>>>>>>> Stashed changes
 var King = /** @class */ (function (_super) {
     __extends(King, _super);
     function King(color, location) {
@@ -77,6 +80,7 @@ var King = /** @class */ (function (_super) {
             this.possibleLocations.push(checkingPosition);
         }
     };
+<<<<<<< Updated upstream
     King.prototype.checkingIfMate = function () {
         var _this = this;
         var checkCouter = 0;
@@ -106,6 +110,8 @@ var King = /** @class */ (function (_super) {
             }
         }
     };
+=======
+>>>>>>> Stashed changes
     return King;
 }(Piece_1.Piece));
 exports.King = King;

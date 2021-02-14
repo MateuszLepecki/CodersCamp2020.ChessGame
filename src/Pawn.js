@@ -23,7 +23,10 @@ var Pawn = /** @class */ (function (_super) {
         return _super.call(this, 'pawn', color, location) || this;
     }
     Pawn.prototype.checkPossibleMoves = function () {
+<<<<<<< Updated upstream
         this.check = false;
+=======
+>>>>>>> Stashed changes
         this.possibleLocations = [];
         var dir = 0;
         if (this.color == 'white')
@@ -37,22 +40,34 @@ var Pawn = /** @class */ (function (_super) {
                 checkingPosition[1] < 1 ||
                 checkingPosition[1] > 8)
                 continue;
+<<<<<<< Updated upstream
             var pieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
             if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color == this.color)
                 continue;
             else if ((i === 0 || i === 2) && pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color) {
                 if (pieceOnWay.type == 'king')
                     this.check = true;
+=======
+            var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
+            if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color == this.color)
+                continue;
+            else if ((i === 0 || i === 2) && PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color) {
+>>>>>>> Stashed changes
                 this.possibleLocations.push(checkingPosition);
                 continue;
             }
             else if (i === 0 ||
                 i === 2 ||
+<<<<<<< Updated upstream
                 (i === 1 && pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color)) {
+=======
+                (i === 1 && PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color)) {
+>>>>>>> Stashed changes
                 continue;
             }
             this.possibleLocations.push(checkingPosition);
         }
+<<<<<<< Updated upstream
         if (this.alreadyMoved == false) {
             if (this.color == 'white')
                 dir = 2;
@@ -64,6 +79,8 @@ var Pawn = /** @class */ (function (_super) {
                 this.possibleLocations.push(checkingPosition);
             }
         }
+=======
+>>>>>>> Stashed changes
     };
     return Pawn;
 }(Piece_1.Piece));

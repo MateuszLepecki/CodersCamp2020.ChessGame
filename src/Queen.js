@@ -29,7 +29,10 @@ var Queen = /** @class */ (function (_super) {
         return _this;
     }
     Queen.prototype.checkPossibleMoves = function () {
+<<<<<<< Updated upstream
         this.check = false;
+=======
+>>>>>>> Stashed changes
         this.possibleLocations = [];
         for (var i = 0; i < 8; i++) {
             var dir = [0, 0];
@@ -66,12 +69,19 @@ var Queen = /** @class */ (function (_super) {
                     checkingPosition[1] < 1 ||
                     checkingPosition[1] > 8)
                     break;
+<<<<<<< Updated upstream
                 var pieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
                 if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color == this.color)
                     break;
                 else if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color) {
                     if (pieceOnWay.type == 'king')
                         this.check = true;
+=======
+                var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
+                if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color == this.color)
+                    break;
+                else if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color) {
+>>>>>>> Stashed changes
                     this.possibleLocations.push(checkingPosition);
                     break;
                 }

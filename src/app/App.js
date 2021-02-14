@@ -34,6 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
+<<<<<<< Updated upstream
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = exports.gameSettings = void 0;
@@ -44,10 +45,19 @@ var timer_1 = require("./timer");
 exports.gameSettings = {
     choosenTime: 1,
 };
+=======
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.App = void 0;
+var chessboard_1 = require("../chessboard");
+var logic_1 = require("../logic");
+var logic_2 = require("../logic");
+>>>>>>> Stashed changes
 function App(_a) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_b) {
             switch (_b.label) {
+<<<<<<< Updated upstream
                 case 0: 
                 //  createStartScreen();
                 return [4 /*yield*/, chessboard_1.chessboard()];
@@ -58,9 +68,17 @@ function App(_a) {
                     timer_1.createTimers();
                     logic_1.listenDOMchessboard();
                     timer_1.updateDOMTimer();
+=======
+                case 0: return [4 /*yield*/, chessboard_1.chessboard()];
+                case 1:
+                    _b.sent();
+                    logic_2.createBoardArray();
+                    logic_1.listenDOMchessboard();
+>>>>>>> Stashed changes
                     return [2 /*return*/];
             }
         });
     });
 }
 exports.App = App;
+;

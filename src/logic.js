@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<< Updated upstream
 exports.checkIfchecked = exports.deleteHighlightedSquares = exports.getAreaArrayIndex = exports.listenDOMchessboard = exports.changeArrayCoordinatesToString = exports.createBoardArray = exports.CHECK = exports.AREASARRAY = void 0;
+=======
+exports.getAreaArrayIndex = exports.listenDOMchessboard = exports.changeArrayCoordinatesToString = exports.createBoardArray = exports.AREASARRAY = void 0;
+>>>>>>> Stashed changes
 var Piece_1 = require("./Piece");
 var King_1 = require("./King");
 var Queen_1 = require("./Queen");
@@ -8,12 +12,17 @@ var Rook_1 = require("./Rook");
 var Bishop_1 = require("./Bishop");
 var Pawn_1 = require("./Pawn");
 var Knight_1 = require("./Knight");
+<<<<<<< Updated upstream
 var bishopW = require('./assets/pieces-svg/bishop_w.svg');
 var bishopB = require('./assets/pieces-svg/bishop_b.svg');
 exports.AREASARRAY = [];
 var BOARD = document.querySelector('.board');
 exports.CHECK = false;
 var kingsIndexes = [];
+=======
+exports.AREASARRAY = [];
+var BOARD = document.querySelector('.board');
+>>>>>>> Stashed changes
 var Letters;
 (function (Letters) {
     Letters[Letters["A"] = 0] = "A";
@@ -38,13 +47,20 @@ var Area = /** @class */ (function () {
     Area.prototype.deletePiece = function () {
         this.piece = 0;
         var querySquare = document.querySelector('.' + exports.changeArrayCoordinatesToString(this.areaCoordinates));
+<<<<<<< Updated upstream
         // querySquare.innerText = '';
         querySquare.innerHTML = '';
+=======
+        querySquare.innerText = '';
+>>>>>>> Stashed changes
     };
     return Area;
 }());
 var createBoardArray = function () {
+<<<<<<< Updated upstream
     exports.AREASARRAY.splice(0, exports.AREASARRAY.length);
+=======
+>>>>>>> Stashed changes
     for (var row = 1; row < 9; row++) {
         for (var column = 1; column < 9; column++) {
             var newArea = new Area(row, column);
@@ -92,6 +108,7 @@ var changeStringCoordinatesToArray = function (position) {
     return resultArray;
 };
 var listenSelection = function (e) {
+<<<<<<< Updated upstream
     var target;
     if (e.target instanceof HTMLElement) {
         target = e.target.parentNode;
@@ -103,6 +120,15 @@ var listenSelection = function (e) {
             selectPiece(arr);
             BOARD.removeEventListener('click', listenSelection);
         }
+=======
+    var target = e.target; // WHAT WILL BE THE PROPER TYPE ??
+    var stringCoordinates = target.classList[0];
+    var arr = changeStringCoordinatesToArray(stringCoordinates);
+    var index = exports.getAreaArrayIndex(arr);
+    if (exports.AREASARRAY[index].piece instanceof Piece_1.Piece) {
+        selectPiece(arr);
+        BOARD.removeEventListener('click', listenSelection);
+>>>>>>> Stashed changes
     }
 };
 var listenDOMchessboard = function () {
@@ -113,6 +139,7 @@ var selectPiece = function (position) {
     BOARD.removeEventListener('click', listenSelection);
     var index = exports.getAreaArrayIndex(position);
     var currentPiece = exports.AREASARRAY[index].piece;
+<<<<<<< Updated upstream
     currentPiece.checkPossibleMoves();
     currentPiece.highlightPossibilities();
     var listenNewPosition = function (e) {
@@ -126,6 +153,15 @@ var selectPiece = function (position) {
             BOARD.removeEventListener('click', listenNewPosition);
             BOARD.addEventListener('click', listenSelection);
         }
+=======
+    var listenNewPosition = function (e) {
+        var target = e.target; // WHAT WILL BE THE PROPER TYPE ??
+        var stringCoordinates = target.classList[0];
+        var arr = changeStringCoordinatesToArray(stringCoordinates);
+        currentPiece.moveIfPossible(arr);
+        BOARD.removeEventListener('click', listenNewPosition);
+        BOARD.addEventListener('click', listenSelection);
+>>>>>>> Stashed changes
     };
     if (currentPiece instanceof Piece_1.Piece) {
         BOARD.addEventListener('click', listenNewPosition);
@@ -141,6 +177,7 @@ var getAreaArrayIndex = function (coordinates) {
     return index;
 };
 exports.getAreaArrayIndex = getAreaArrayIndex;
+<<<<<<< Updated upstream
 var deleteHighlightedSquares = function () {
     var highlighted = document.querySelectorAll('.possibileMoves');
     highlighted.forEach(function (el) {
@@ -173,3 +210,5 @@ var checkIfchecked = function () {
     exports.CHECK = false;
 };
 exports.checkIfchecked = checkIfchecked;
+=======
+>>>>>>> Stashed changes

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<< Updated upstream
 exports.createIMG = exports.Piece = void 0;
 var logic_1 = require("./logic");
 var timer_1 = require("./app/timer");
@@ -15,11 +16,18 @@ var queenwhite = require('./assets/pieces-svg/queen_w.svg');
 var queenblack = require('./assets/pieces-svg/queen_b.svg');
 var rookwhite = require('./assets/pieces-svg/rook_w.svg');
 var rookblack = require('./assets/pieces-svg/rook_b.svg');
+=======
+exports.Piece = void 0;
+var logic_1 = require("./logic");
+var logic_2 = require("./logic");
+var logic_3 = require("./logic");
+>>>>>>> Stashed changes
 var Piece = /** @class */ (function () {
     function Piece(type, color, location) {
         var _this = this;
         this.type = 'noneType';
         this.color = 'noneColor';
+<<<<<<< Updated upstream
         this.check = false;
         this.location = [-1, -1];
         this.possibleLocations = [];
@@ -38,6 +46,18 @@ var Piece = /** @class */ (function () {
                 var possibleSquare = document.querySelector('.' + logic_1.changeArrayCoordinatesToString(e));
                 possibleSquare === null || possibleSquare === void 0 ? void 0 : possibleSquare.classList.add('possibileMoves');
             });
+=======
+        this.location = [-1, -1];
+        this.possibleLocations = [];
+        this.initializePiece = function (place) {
+            _this.location = place;
+            var index = logic_2.getAreaArrayIndex(place);
+            logic_3.AREASARRAY[index].deletePiece();
+            logic_3.AREASARRAY[index].putPieceHere(_this);
+            var stringCoordinates = logic_1.changeArrayCoordinatesToString(place);
+            var querySquare = document.querySelector('.' + stringCoordinates);
+            querySquare.innerText = _this.type;
+>>>>>>> Stashed changes
         };
         this.type = type;
         this.color = color;
@@ -45,6 +65,7 @@ var Piece = /** @class */ (function () {
         this.initializePiece(location);
     }
     Piece.prototype.moveIfPossible = function (whereToPlace) {
+<<<<<<< Updated upstream
         if (this.color == timer_1.whichColorTurn()) {
             if (this.possibleLocations.findIndex(function (e) {
                 return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
@@ -62,11 +83,27 @@ var Piece = /** @class */ (function () {
                 logic_1.deleteHighlightedSquares();
                 timer_1.switchTimers();
             }
+=======
+        this.checkPossibleMoves();
+        if (this.possibleLocations.findIndex(function (e) {
+            return e[0] == whereToPlace[0] && e[1] == whereToPlace[1];
+        }) != -1) {
+            var currentIndex = logic_2.getAreaArrayIndex(this.location);
+            logic_3.AREASARRAY[currentIndex].deletePiece();
+            this.location = whereToPlace;
+            var index = logic_2.getAreaArrayIndex(whereToPlace);
+            logic_3.AREASARRAY[index].deletePiece();
+            logic_3.AREASARRAY[index].putPieceHere(this);
+            var stringCoordinates = logic_1.changeArrayCoordinatesToString(whereToPlace);
+            var querySquare = document.querySelector('.' + stringCoordinates);
+            querySquare.innerText = this.type;
+>>>>>>> Stashed changes
         }
     };
     return Piece;
 }());
 exports.Piece = Piece;
+<<<<<<< Updated upstream
 var createIMG = function (imgID, parent, className) {
     var img = document.createElement('img');
     img.className = className;
@@ -74,3 +111,5 @@ var createIMG = function (imgID, parent, className) {
     parent.appendChild(img);
 };
 exports.createIMG = createIMG;
+=======
+>>>>>>> Stashed changes

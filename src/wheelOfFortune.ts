@@ -7,6 +7,8 @@ import { Bishop } from './Bishop';
 import { Pawn } from './Pawn';
 import { Knight } from './Knight';
 
+const MAIN = document.querySelector('#main-wrap');
+
 enum lightFigure {
     Bishop,
     Knight,
@@ -66,14 +68,43 @@ function engorgio(piece: Piece) {
 
 function obliviate() {
     // Obliviate - Gracz widzi tylko swoje pionki
+    
 }
 function lumos() {
     //Lumos - podwaja zasięg ruchu figury
 }
+let randomDisplay = document.createElement("div");
+randomDisplay.classList.add('randomDiv');
+randomDisplay.innerText = "Your spell.."
+let randomButton = document.createElement('button');
+randomButton.classList.add('randomButton');
+
+let randomSpell: number;
+let spellList = ["Energio", "Reducio"];
+randomButton.addEventListener("click", e => {
+    let random = getRandomIntInclusive(1, 2);
+    randomButton.disabled = true;
+    let i = -3;
+    const time = setInterval(() => {
+        if (randomDisplay.innerText == spellList[0]){
+             randomDisplay.innerText = spellList[1];
+        }
+         else if (randomDisplay.innerText == spellList[1]) {
+             randomDisplay.innerText = spellList[0];
+        }
+   
+    if (i == random) {
+        clearInterval(time);
+        randomSpell = random;
+
+    }
+    i++;
+}, 500);
+});
+
 
 function randomPowerUp(piece: Piece) {
-    let random = getRandomIntInclusive(0, 11);
-    switch (random) {
+    switch (randomSpell) {
         case 0:
             reducio(piece); //ten piece teraz na zapełnienie dziury
             break;
