@@ -1,5 +1,9 @@
 import logo from './assets/logo/chess_logo_logo.svg';
 import { createNewElement, createNewImgElement } from './app/startScreen';
+import { gameSettings } from './app/App';
+import { chessboard } from './chessboard';
+import { listenDOMchessboard } from './logic';
+import { createBoardArray } from './logic';
 
 const mainWrap = document.getElementById('main-wrap');
 
@@ -28,6 +32,14 @@ function createTimeScreenStructure() {
     showChosenTime(timeInput, timeOutput);
 
     const playBtn = createNewElement('button', 'btn startbtn', startWrap, PLAY_BTN);
+    // playBtn.addEventListener('click', async function() {
+
+    //     await chessboard();
+
+	//     createBoardArray();
+
+	//     listenDOMchessboard();
+    // })
 }
 
 function createNewRangeInputElement(min: string, max: string, step: string, label: string, id: string, parent: HTMLElement, text: string = '') {
@@ -54,8 +66,8 @@ const startWrap = document.getElementById('#startwrap');
 function chooseTime(i: HTMLInputElement) {
     i.value = '10';
     i.addEventListener('change', function(){
-        console.log(i.value);
-        return i.value;
+        gameSettings.choosenTime = i.valueAsNumber;
+        console.log(gameSettings);
     });
 }
 

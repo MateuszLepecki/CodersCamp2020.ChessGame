@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createTimeScreen = void 0;
 var chess_logo_logo_svg_1 = __importDefault(require("./assets/logo/chess_logo_logo.svg"));
 var startScreen_1 = require("./app/startScreen");
+var App_1 = require("./app/App");
 var mainWrap = document.getElementById('main-wrap');
 function createTimeScreen() {
     createTimeScreenStructure();
@@ -26,6 +27,11 @@ function createTimeScreenStructure() {
     chooseTime(timeInput);
     showChosenTime(timeInput, timeOutput);
     var playBtn = startScreen_1.createNewElement('button', 'btn startbtn', startWrap, PLAY_BTN);
+    // playBtn.addEventListener('click', async function() {
+    //     await chessboard();
+    //     createBoardArray();
+    //     listenDOMchessboard();
+    // })
 }
 function createNewRangeInputElement(min, max, step, label, id, parent, text) {
     if (text === void 0) { text = ''; }
@@ -50,8 +56,8 @@ var startWrap = document.getElementById('#startwrap');
 function chooseTime(i) {
     i.value = '10';
     i.addEventListener('change', function () {
-        console.log(i.value);
-        return i.value;
+        App_1.gameSettings.choosenTime = i.valueAsNumber;
+        console.log(App_1.gameSettings);
     });
 }
 function showChosenTime(i, o) {

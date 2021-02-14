@@ -1,13 +1,12 @@
 import logo from '../assets/logo/chess_logo_logo.svg';
 import { createTimeScreen } from '../timeRange'
-
-let selectedSkin = 'G';
+import { gameSettings } from '../app/App';
 
 export function createStartScreen() {
     createStartScreenStructure();
 }
 
-function createStartScreenStructure() {
+export function createStartScreenStructure() {
     const mainWrap = document.getElementById('main-wrap');
     mainWrap!.innerHTML = '';
 
@@ -56,9 +55,15 @@ export function createNewElement(tag: string, className: string, parent: HTMLEle
     return newElement;
 }
 
-function chooseHouseListener(this: HTMLElement) {
+export function chooseHouseListener(this: HTMLElement) {
     console.log(`Clicked: ${this.classList[2]}`);
-    // if (this.classList[2] === 'G') {
-
-    // }
+    if (this.classList[2] === 'G'){
+        gameSettings.choosenSkin = 'G';
+    } else if (this.classList[2] === 'H'){
+        gameSettings.choosenSkin = 'H';
+    } else if (this.classList[2] === 'R'){
+        gameSettings.choosenSkin = 'R';
+    } else if (this.classList[2] === 'S'){
+        gameSettings.choosenSkin = 'S';
+    }
 }

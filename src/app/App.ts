@@ -4,6 +4,11 @@ import { listenDOMchessboard } from '../logic';
 import { createBoardArray } from '../logic';
 import { createTimeScreen } from '../timeRange';
 
+export const gameSettings = {
+	choosenTime: 10,
+	choosenSkin: 'G'
+}
+
 export async function App ({})  {
 
 	createStartScreen();
@@ -16,4 +21,3 @@ export async function App ({})  {
 
 	
 };
-

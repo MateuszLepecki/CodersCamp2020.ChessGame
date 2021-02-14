@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createNewElement = exports.createNewImgElement = exports.createStartScreen = void 0;
+exports.chooseHouseListener = exports.createNewElement = exports.createNewImgElement = exports.createStartScreenStructure = exports.createStartScreen = void 0;
 var chess_logo_logo_svg_1 = __importDefault(require("../assets/logo/chess_logo_logo.svg"));
 var timeRange_1 = require("../timeRange");
-var selectedSkin = 'G';
+var App_1 = require("../app/App");
 function createStartScreen() {
     createStartScreenStructure();
 }
@@ -35,6 +35,7 @@ function createStartScreenStructure() {
     housesS.addEventListener('click', chooseHouseListener);
     startBtn.addEventListener('click', timeRange_1.createTimeScreen);
 }
+exports.createStartScreenStructure = createStartScreenStructure;
 function createNewImgElement(className, source, parent) {
     var newImgElement = document.createElement('img');
     newImgElement.className = className;
@@ -54,6 +55,17 @@ function createNewElement(tag, className, parent, text) {
 exports.createNewElement = createNewElement;
 function chooseHouseListener() {
     console.log("Clicked: " + this.classList[2]);
-    // if (this.classList[2] === 'G') {
-    // }
+    if (this.classList[2] === 'G') {
+        App_1.gameSettings.choosenSkin = 'G';
+    }
+    else if (this.classList[2] === 'H') {
+        App_1.gameSettings.choosenSkin = 'H';
+    }
+    else if (this.classList[2] === 'R') {
+        App_1.gameSettings.choosenSkin = 'R';
+    }
+    else if (this.classList[2] === 'S') {
+        App_1.gameSettings.choosenSkin = 'S';
+    }
 }
+exports.chooseHouseListener = chooseHouseListener;
