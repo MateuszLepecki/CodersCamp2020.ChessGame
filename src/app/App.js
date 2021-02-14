@@ -37,23 +37,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
-var chessboard_1 = require("../chessboard");
-var logic_1 = require("../logic");
-var logic_2 = require("../logic");
+var startScreen_1 = require("./startScreen");
 function App(_a) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0: 
-                // await createStartScreen();
-                return [4 /*yield*/, chessboard_1.chessboard()];
-                case 1:
-                    // await createStartScreen();
-                    _b.sent();
-                    logic_2.createBoardArray();
-                    logic_1.listenDOMchessboard();
-                    return [2 /*return*/];
-            }
+            startScreen_1.createStartScreen();
+            return [2 /*return*/];
         });
     });
 }

@@ -1,9 +1,9 @@
 #startwrap {
     display: grid;
-    grid-template-areas: 
-    "logo"
-    "houses"
-    "button";
+    grid-template-areas:
+        'logo'
+        'houses'
+        'button';
 }
 
 .logo {
@@ -25,7 +25,7 @@
 }
 
 .houses:after {
-    content: "";
+    content: '';
     display: block;
     padding-bottom: 100%;
 }
@@ -39,52 +39,164 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    border: white solid 5px;
-    color: white;
 }
 
-.G:hover {
-    color: #D67E03;
-    background-color: #6C1A31;
-    border:  #6C1A31 solid 5px;
-}
-
-.H:hover {
-    color: #5E3225;
-    background-color: #BA7625;
-    border:  #BA7625 solid 5px;
-}
-
-.R:hover {
-    color: #7B9BC1;
-    background-color: #063F53;
-    border:  #063F53 solid 5px;
-}
-
-.S:hover {
-    color: #8B8A8F;
-    background-color: #134731;
-    border:  #134731 solid 5px;
-}
-
-button {
+.btn {
     background-color: transparent;
-    border: none;
+    border: white solid 5px;
     font-family: 'Oswald', sans-serif;
     font-size: 40px;
     color: white;
     cursor: pointer;
     outline: none;
+    border-radius: 10px;
+    text-transform: uppercase;
 }
 
-.btn {
-    border-radius: 10px;
+.btn:hover {
+    color: #191919;
+    background-color: white;
     border: white solid 5px;
-    text-transform: uppercase;
+}
+
+.G:hover,
+.G:focus {
+    color: #d67e03;
+    background-color: #6c1a31;
+    border: #6c1a31 solid 5px;
+}
+
+.H:hover,
+.H:focus {
+    color: #5e3225;
+    background-color: #ba7625;
+    border: #ba7625 solid 5px;
+}
+
+.R:hover,
+.R:focus {
+    color: #7b9bc1;
+    background-color: #063f53;
+    border: #063f53 solid 5px;
+}
+
+.S:hover,
+.S:focus {
+    color: #8b8a8f;
+    background-color: #134731;
+    border: #134731 solid 5px;
 }
 
 .startbtn {
     grid-area: button;
     margin-top: 50px;
 }
+
+.logowrap {
+    grid-area: logo;
+    min-width: 550px;
+    display: grid;
+    justify-content: center;
+}
+
+.logotime {
+    width: 200px;
+    margin-bottom: 100px;
+}
+
+.rangewrap {
+    grid-area: houses;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+label[for='timeset'] {
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    color: #d67e03;
+    text-transform: uppercase;
+}
+
+#outputtime {
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+input[type='range'] {
+    display: block;
+    width: 100%;
+    margin: 50px 0;
+    -webkit-appearance: none;
+    background: transparent;
+    outline: none;
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 0.9rem;
+    margin: 0;
+    width: 100%;
+    cursor: pointer;
+    background: #d67e03;
+    border-radius: 50px;
+    height: 5px;
+  }
+  
+  input[type='range']::-moz-range-track {
+    height: 0.9rem;
+    margin: 0;
+    width: 100%;
+    cursor: pointer;
+    background: #d67e03;
+    border-radius: 50px;
+    height: 5px;
+  }
+  
+  input[type='range']::-ms-track {
+    height: 0.9rem;
+    margin: 0;
+    width: 100%;
+    cursor: pointer;
+    color: transparent;
+    background: #d67e03;
+    border-radius: 50px;
+    height: 5px;
+  }
+  
+  input[type='range']::-ms-fill-lower {
+    background: transparent;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: .75rem;
+    background: #d67e03;
+    cursor: pointer;
+    margin-top: -10px;
+  }
+  
+  input[type=range]::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 0.75rem;
+    background: #d67e03;
+    cursor: pointer;
+    margin-top: -14px;
+    border: transparent;
+  }
+  
+  input[type=range]::-ms-thumb {
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 0.75rem;
+    background: #d67e03;
+    cursor: pointer;
+    margin-top: -14px;
+  }
