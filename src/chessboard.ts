@@ -1,9 +1,12 @@
+const logo = require('./assets/logo/chess_logo_logo.svg');
+// import logo from './assets/logo/chess_logo_logo.svg';
+
 const main = document.getElementById('main-wrap');
 const board = document.createElement('div');
 board.classList.add('board');
 const img = document.createElement('img');
 img.classList.add('img');
-img.src = '#';
+img.src = logo;
 const outerBoard = document.createElement('div');
 outerBoard.classList.add('outerBoard');
 const numbers = document.createElement('div');
@@ -23,7 +26,6 @@ outerBoard.appendChild(letters);
 outerBoard.appendChild(board);
 
 export function chessboard() {
-
     function getBoard() {
         for (let i = 8; i >= 1; i--) {
             let row = document.createElement('div');
@@ -42,9 +44,9 @@ export function chessboard() {
                 }
                 square.classList.add('square');
                 if (j % 2 === 0) {
-                    square.style.backgroundColor = '#6C1A31';
+                    square.classList.add('firstColor');
                 } else {
-                    square.style.backgroundColor = '#D67E03';
+                    square.classList.add('secondColor');
                 }
                 row.appendChild(square);
             }
