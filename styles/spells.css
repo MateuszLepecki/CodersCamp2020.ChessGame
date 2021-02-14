@@ -1,0 +1,8 @@
+.spellWraper {
+    /*TESTEST*/
+    color: white;
+    font-size: large;
+    height: 30%;
+    width: 30%;
+    border: red solid 5px;
+}

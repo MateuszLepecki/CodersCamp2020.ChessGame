@@ -1,11 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.spellSection = void 0;
 var Queen_1 = require("./Queen");
 var Rook_1 = require("./Rook");
 var Bishop_1 = require("./Bishop");
 var Pawn_1 = require("./Pawn");
 var Knight_1 = require("./Knight");
+var timer_1 = require("./app/timer");
 var MAIN = document.querySelector('#main-wrap');
+function spellSection() {
+    createRandomStructure();
+}
+exports.spellSection = spellSection;
+function createRandomStructure() {
+    var spellWraper = timer_1.createDOMElement('div', 'spellWraper', MAIN, 'Spel dla testu');
+    // createDOMElement("div", "randomDisplay", spellWraper, "Your spell");
+    // createDOMElement("button", "randomButton", spellWraper);
+}
 var lightFigure;
 (function (lightFigure) {
     lightFigure[lightFigure["Bishop"] = 0] = "Bishop";
@@ -69,39 +80,41 @@ function obliviate() {
 function lumos() {
     //Lumos - podwaja zasięg ruchu figury
 }
-var randomDisplay = document.createElement("div");
+var randomDisplay = document.createElement('div');
 randomDisplay.classList.add('randomDiv');
-randomDisplay.innerText = "Your spell..";
+randomDisplay.innerText = 'Your spell..';
 var randomButton = document.createElement('button');
 randomButton.classList.add('randomButton');
 var randomSpell;
-var spellList = ["Energio", "Reducio"];
-randomButton.addEventListener("click", function (e) {
-    var random = getRandomIntInclusive(1, 2);
+var spellList = ['Energio', 'Reducio'];
+randomButton.addEventListener('click', function (e) {
+    var random = getRandomIntInclusive(0, 1);
     randomButton.disabled = true;
-    var i = -3;
+    var i = 0;
+    var circle = 0;
     var time = setInterval(function () {
-        if (randomDisplay.innerText == spellList[0]) {
-            randomDisplay.innerText = spellList[1];
-        }
-        else if (randomDisplay.innerText == spellList[1]) {
-            randomDisplay.innerText = spellList[0];
-        }
-        if (i == random) {
+        if (random == i && circle > 0) {
             clearInterval(time);
             randomSpell = random;
         }
+        randomDisplay.innerText = spellList[i];
+        if (i == spellList.length - 1) {
+            if (circle == 0) {
+                i = 0;
+                circle++;
+            }
+        }
         i++;
     }, 500);
-});
-function randomPowerUp(piece) {
-    switch (randomSpell) {
-        case 0:
-            reducio(piece); //ten piece teraz na zapełnienie dziury
-            break;
-        case 1:
-            engorgio(piece);
-            break;
-        case 2:
+    function randomPowerUp(piece) {
+        switch (randomSpell) {
+            case 0:
+                reducio(piece); //ten piece teraz na zapełnienie dziury
+                break;
+            case 1:
+                engorgio(piece);
+                break;
+            case 2:
+        }
     }
-}
+});

@@ -1,21 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.chessboard = void 0;
-<<<<<<< Updated upstream
 var logo = require('./assets/logo/chess_logo_logo.svg');
 // import logo from './assets/logo/chess_logo_logo.svg';
-=======
->>>>>>> Stashed changes
 var main = document.getElementById('main-wrap');
 var board = document.createElement('div');
 board.classList.add('board');
 var img = document.createElement('img');
 img.classList.add('img');
-<<<<<<< Updated upstream
 img.src = logo;
-=======
-img.src = '#';
->>>>>>> Stashed changes
 var outerBoard = document.createElement('div');
 outerBoard.classList.add('outerBoard');
 var numbers = document.createElement('div');
@@ -53,17 +46,10 @@ function chessboard() {
                 }
                 square.classList.add('square');
                 if (j % 2 === 0) {
-<<<<<<< Updated upstream
                     square.classList.add('firstColor');
                 }
                 else {
                     square.classList.add('secondColor');
-=======
-                    square.style.backgroundColor = '#6C1A31';
-                }
-                else {
-                    square.style.backgroundColor = '#D67E03';
->>>>>>> Stashed changes
                 }
                 row.appendChild(square);
             }

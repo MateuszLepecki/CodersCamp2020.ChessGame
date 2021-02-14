@@ -1,5 +1,6 @@
 import { createStartScreen } from './startScreen';
 import { chessboard } from '../chessboard';
+import {spellSection} from '../wheelOfFortune';
 import { listenDOMchessboard } from '../logic';
 import { createBoardArray } from '../logic';
 import { switchTimers, updateDOMTimer, createTimers } from './timer';
@@ -15,6 +16,7 @@ export async function App({}) {
 	createBoardArray();
 	createTimers();
     listenDOMchessboard();
+    spellSection();
 
     updateDOMTimer();
 }
