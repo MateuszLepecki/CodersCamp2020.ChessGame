@@ -1,12 +1,15 @@
 export {};
 import { coordinates } from './Piece';
 import { Piece } from './Piece';
-import { King } from './king';
-import { Queen } from './queen';
+import { King } from './King';
+import { Queen } from './Queen';
 import { Rook } from './Rook';
-import { Bishop } from './bishop';
-import { Pawn } from './pawn';
-import { Knight } from './knight';
+import { Bishop } from './Bishop';
+import { Pawn } from './Pawn';
+import { Knight } from './Knight';
+
+const bishopW = require('./assets/pieces-svg/bishop_w.svg');
+const bishopB = require('./assets/pieces-svg/bishop_b.svg');
 
 export const AREASARRAY: Area[] = [];
 const BOARD = document.querySelector('.board')! as HTMLElement;
@@ -40,7 +43,8 @@ class Area {
         const querySquare = document.querySelector(
             '.' + changeArrayCoordinatesToString(this.areaCoordinates),
         )! as HTMLElement;
-        querySquare.innerText = '';
+        // querySquare.innerText = '';
+        querySquare.innerHTML = '';
     }
 }
 
@@ -99,7 +103,7 @@ const changeStringCoordinatesToArray = (position: string): coordinates => {
 const listenSelection = (e: Event) => {
     let target;
     if (e.target instanceof HTMLElement) {
-        target = e.target;
+        target = e.target.parentNode as HTMLDivElement;
         const stringCoordinates: string = target.classList[0];
         let arr = changeStringCoordinatesToArray(stringCoordinates);
         let index = getAreaArrayIndex(arr);

@@ -4,7 +4,7 @@ import { AREASARRAY } from './logic';
 
 export class Rook extends Piece {
     constructor(color: string, location: coordinates) {
-        super('rock', color, location);
+        super('rook', color, location);
     }
     checkPossibleMoves() {
         this.check = false;

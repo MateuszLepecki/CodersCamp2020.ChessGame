@@ -9,7 +9,7 @@ export const gameSettings = {
 
 
 export async function App({}) {
-    // await createStartScreen();
+    //  createStartScreen();
     await chessboard();
 
 	createBoardArray();

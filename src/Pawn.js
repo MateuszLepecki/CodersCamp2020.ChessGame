@@ -23,10 +23,7 @@ var Pawn = /** @class */ (function (_super) {
         return _super.call(this, 'pawn', color, location) || this;
     }
     Pawn.prototype.checkPossibleMoves = function () {
-<<<<<<< HEAD
         this.check = false;
-=======
->>>>>>> mainScreen
         this.possibleLocations = [];
         var dir = 0;
         if (this.color == 'white')
@@ -40,34 +37,22 @@ var Pawn = /** @class */ (function (_super) {
                 checkingPosition[1] < 1 ||
                 checkingPosition[1] > 8)
                 continue;
-<<<<<<< HEAD
             var pieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
             if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color == this.color)
                 continue;
             else if ((i === 0 || i === 2) && pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color) {
                 if (pieceOnWay.type == 'king')
                     this.check = true;
-=======
-            var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-            if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color == this.color)
-                continue;
-            else if ((i === 0 || i === 2) && PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color) {
->>>>>>> mainScreen
                 this.possibleLocations.push(checkingPosition);
                 continue;
             }
             else if (i === 0 ||
                 i === 2 ||
-<<<<<<< HEAD
                 (i === 1 && pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color)) {
-=======
-                (i === 1 && PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color)) {
->>>>>>> mainScreen
                 continue;
             }
             this.possibleLocations.push(checkingPosition);
         }
-<<<<<<< HEAD
         if (this.alreadyMoved == false) {
             if (this.color == 'white')
                 dir = 2;
@@ -79,8 +64,6 @@ var Pawn = /** @class */ (function (_super) {
                 this.possibleLocations.push(checkingPosition);
             }
         }
-=======
->>>>>>> mainScreen
     };
     return Pawn;
 }(Piece_1.Piece));

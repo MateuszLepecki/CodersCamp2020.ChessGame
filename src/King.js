@@ -17,12 +17,9 @@ exports.King = void 0;
 var Piece_1 = require("./Piece");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
-<<<<<<< HEAD
 var timer_1 = require("./app/timer");
 var DIV_ELEMENT = 'div';
 var MAIN = document.querySelector('#main-wrap');
-=======
->>>>>>> mainScreen
 var King = /** @class */ (function (_super) {
     __extends(King, _super);
     function King(color, location) {
@@ -80,7 +77,6 @@ var King = /** @class */ (function (_super) {
             this.possibleLocations.push(checkingPosition);
         }
     };
-<<<<<<< HEAD
     King.prototype.checkingIfMate = function () {
         var _this = this;
         var checkCouter = 0;
@@ -110,8 +106,6 @@ var King = /** @class */ (function (_super) {
             }
         }
     };
-=======
->>>>>>> mainScreen
     return King;
 }(Piece_1.Piece));
 exports.King = King;

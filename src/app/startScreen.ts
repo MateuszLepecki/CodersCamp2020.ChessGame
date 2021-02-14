@@ -1,4 +1,4 @@
-import logo from '../assets/logo/chess_logo_logo.svg';
+// import logo from '../assets/logo/chess_logo_logo.svg';
 
 export function createStartScreen() {
     createStartScreenStructure();
@@ -13,7 +13,7 @@ function createStartScreenStructure() {
 
     mainWrap!.appendChild(startWrap);
 
-    createNewImgElement('logo', logo, startWrap);
+    // createNewImgElement('logo', logo, startWrap);
 
     const housesWrap = createNewElement('div', 'houseswrap', startWrap);
     const housesG = createNewElement('button', 'houses', housesWrap);

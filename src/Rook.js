@@ -20,13 +20,10 @@ var logic_2 = require("./logic");
 var Rook = /** @class */ (function (_super) {
     __extends(Rook, _super);
     function Rook(color, location) {
-        return _super.call(this, 'rock', color, location) || this;
+        return _super.call(this, 'rook', color, location) || this;
     }
     Rook.prototype.checkPossibleMoves = function () {
-<<<<<<< HEAD
         this.check = false;
-=======
->>>>>>> mainScreen
         this.possibleLocations = [];
         for (var i = 0; i < 4; i++) {
             var dir = [0, 0];
@@ -51,19 +48,12 @@ var Rook = /** @class */ (function (_super) {
                     checkingPosition[1] < 1 ||
                     checkingPosition[1] > 8)
                     break;
-<<<<<<< HEAD
                 var pieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
                 if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color == this.color)
                     break;
                 else if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color) {
                     if (pieceOnWay.type == 'king')
                         this.check = true;
-=======
-                var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-                if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color == this.color)
-                    break;
-                else if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color) {
->>>>>>> mainScreen
                     this.possibleLocations.push(checkingPosition);
                     break;
                 }

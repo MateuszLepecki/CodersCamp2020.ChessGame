@@ -1,5 +1,5 @@
-// const logo = require('./assets/logo/chess_logo_logo.svg');
-import logo from './assets/logo/chess_logo_logo.svg';
+const logo = require('./assets/logo/chess_logo_logo.svg');
+// import logo from './assets/logo/chess_logo_logo.svg';
 
 const main = document.getElementById('main-wrap');
 const board = document.createElement('div');
