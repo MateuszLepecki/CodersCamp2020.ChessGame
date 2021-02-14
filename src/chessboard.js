@@ -1,17 +1,14 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.chessboard = void 0;
-// const logo = require('./assets/logo/chess_logo_logo.svg');
-var chess_logo_logo_svg_1 = __importDefault(require("./assets/logo/chess_logo_logo.svg"));
+var logo = require('./assets/logo/chess_logo_logo.svg');
+// import logo from './assets/logo/chess_logo_logo.svg';
 var main = document.getElementById('main-wrap');
 var board = document.createElement('div');
 board.classList.add('board');
 var img = document.createElement('img');
 img.classList.add('img');
-img.src = chess_logo_logo_svg_1.default;
+img.src = logo;
 var outerBoard = document.createElement('div');
 outerBoard.classList.add('outerBoard');
 var numbers = document.createElement('div');
@@ -49,10 +46,10 @@ function chessboard() {
                 }
                 square.classList.add('square');
                 if (j % 2 === 0) {
-                    square.style.backgroundColor = '#6C1A31';
+                    square.classList.add('firstColor');
                 }
                 else {
-                    square.style.backgroundColor = '#D67E03';
+                    square.classList.add('secondColor');
                 }
                 row.appendChild(square);
             }

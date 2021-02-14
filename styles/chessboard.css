@@ -25,31 +25,36 @@ body {
     top: 20px;
     margin-right: 1vw;
     width: 10px;
-    height: 520px;
+    height: 480px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-end;
 }
-.number, .letter {
+.number,
+.letter {
     font-family: 'Oswald', sans-serif;
     font-size: 25px;
     color: white;
 }
 .letters {
-    width: 480px;
+    width: 440px;
     height: 40px;
     display: flex;
     justify-content: space-around;
 }
 .row {
     display: flex;
-    width: 480px;
-    height: 56px;
-    
+    width: 440px;
+    height: 50px;
     border: 3px solid #191919;
 }
-
+.firstColor {
+    background-color: #d67e03;
+}
+.secondColor {
+    background-color: #6c1a31;
+}
 .square {
     width: 100%;
     height: 100%;
@@ -58,15 +63,15 @@ body {
     border-left: 3px solid #191919;
 }
 .taken-pawns {
-    width: 240px;
+    width: 300px;
     height: 100vh;
 }
 .list-of-moves {
-    width: 240px;
+    width: 300px;
     height: 100vh;
 }
 
-@media (max-width: 530px) {
+@media (max-width: 550px) {
     .row {
         width: 400px;
         height: 50px;
@@ -90,7 +95,7 @@ body {
         height: 340px;
     }
 }
-@media (max-width: 350px) {
+@media (max-width: 380px) {
     .row {
         width: 280px;
         height: 35px;
@@ -100,5 +105,10 @@ body {
     }
     .numbers {
         height: 300px;
+    }
+    .img {
+        left: 25%;
+        width: 40vw;
+        height: auto;
     }
 }

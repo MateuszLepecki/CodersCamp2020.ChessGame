@@ -1,15 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
+// import logo from '../assets/logo/chess_logo_logo.svg';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.chooseHouseListener = exports.createNewElement = exports.createNewImgElement = exports.createStartScreenStructure = exports.createStartScreen = void 0;
-var chess_logo_logo_svg_1 = __importDefault(require("../assets/logo/chess_logo_logo.svg"));
-var timeRange_1 = require("../timeRange");
-var App_1 = require("../app/App");
-function createStartScreen() {
-    createStartScreenStructure();
-}
+
 exports.createStartScreen = createStartScreen;
 function createStartScreenStructure() {
     var mainWrap = document.getElementById('main-wrap');
@@ -17,7 +9,7 @@ function createStartScreenStructure() {
     var startWrap = document.createElement('div');
     startWrap.id = 'startwrap';
     mainWrap.appendChild(startWrap);
-    createNewImgElement('logo', chess_logo_logo_svg_1.default, startWrap);
+    // createNewImgElement('logo', logo, startWrap);
     var housesWrap = createNewElement('div', 'houseswrap', startWrap);
     var housesG = createNewElement('button', 'btn houses G', housesWrap);
     var housesH = createNewElement('button', 'btn houses H', housesWrap);

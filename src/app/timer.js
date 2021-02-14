@@ -1,13 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.changeTimeToString = exports.createDOMElement = exports.insertTimerIntoDOM = exports.switchTimers = exports.createTimers = exports.Timer = void 0;
+exports.turnTimerOffFaster = exports.updateDOMTimer = exports.changeTimeToString = exports.createDOMElement = exports.insertTimerIntoDOM = exports.switchTimers = exports.createTimers = exports.whichColorTurn = exports.Timer = exports.DOMTimers = exports.CANCELTIMER = void 0;
 var App_1 = require("./App");
 var MAIN = document.querySelector('#main-wrap');
 var DIV_ELEMENT = 'div';
-var cancelTimer = false;
-var DOMTimers = [];
+exports.CANCELTIMER = {
+    flag: false,
+};
+exports.DOMTimers = [];
+var Timers = [];
 var Timer = /** @class */ (function () {
     function Timer(initialTime, player) {
+        this.endOftime = false;
         this.minutes = initialTime;
         this.seconds = 0;
         this.stopped = true;
@@ -23,7 +27,7 @@ var Timer = /** @class */ (function () {
             _this.seconds--;
             // this.showRemainingTime();
             if (_this.seconds === 0 && _this.minutes === 0) {
-                _this.endOfTime();
+                _this.endOfTimeMethod();
                 clearInterval(interval);
             }
         }, 1000);
@@ -40,43 +44,50 @@ var Timer = /** @class */ (function () {
     // showRemainingTime(): void {
     //     console.log(`${this.color} - time left: ${this.minutes}:${this.seconds}`);
     // }
-    Timer.prototype.endOfTime = function () {
+    Timer.prototype.endOfTimeMethod = function () {
+        this.endOftime = true;
         console.log('End of time - you lose');
+        if (MAIN instanceof HTMLElement) {
+            var youLoseDiv = exports.createDOMElement(DIV_ELEMENT, 'youLose', MAIN);
+            youLoseDiv.innerText = "YOU LOSE!";
+        }
     };
     return Timer;
 }());
 exports.Timer = Timer;
+var whichColorTurn = function () {
+    if (Timers[0].stopped === false)
+        return 'white';
+    if (Timers[0].endOftime === true || Timers[1].endOftime === true || exports.CANCELTIMER.flag === true)
+        return 'endOfTime';
+    else
+        return 'black';
+};
+exports.whichColorTurn = whichColorTurn;
 var createTimers = function () {
-    cancelTimer = false;
-    var timerOne = new Timer(App_1.gameSettings.choosenTime, 'one');
-    var timerTwo = new Timer(App_1.gameSettings.choosenTime, 'two');
-    timerOne.startCounting();
-    setTimeout(function () {
-        exports.switchTimers(timerOne, timerTwo);
-    }, 10000);
-    setTimeout(function () {
-        exports.switchTimers(timerOne, timerTwo);
-    }, 24000);
-    DOMTimers = exports.insertTimerIntoDOM(timerOne, timerTwo);
-    updateDOMTimer(timerOne, timerTwo);
+    Timers[0] = new Timer(App_1.gameSettings.choosenTime, 'white');
+    Timers[1] = new Timer(App_1.gameSettings.choosenTime, 'black');
+    Timers[0].startCounting();
+    exports.insertTimerIntoDOM();
+    exports.updateDOMTimer();
 };
 exports.createTimers = createTimers;
-var switchTimers = function (timerWhite, timerBlack) {
-    if (timerBlack.stopped === true && timerWhite.stopped === false) {
-        timerWhite.stopCounting();
-        timerBlack.startCounting();
+var switchTimers = function () {
+    if (Timers[1].stopped === true && Timers[0].stopped === false) {
+        Timers[0].stopCounting();
+        Timers[1].startCounting();
     }
     else {
-        timerBlack.stopCounting();
-        timerWhite.startCounting();
+        Timers[1].stopCounting();
+        Timers[0].startCounting();
     }
 };
 exports.switchTimers = switchTimers;
-var insertTimerIntoDOM = function (timerOne, timerTwo) {
+var insertTimerIntoDOM = function () {
     var timersWrapper = exports.createDOMElement(DIV_ELEMENT, 'timerWrapper', MAIN);
     var player1timer = exports.createDOMElement(DIV_ELEMENT, 'player1timer timer', timersWrapper);
     var player2timer = exports.createDOMElement(DIV_ELEMENT, 'player2timer timer', timersWrapper);
-    return [player1timer, player2timer];
+    exports.DOMTimers = [player1timer, player2timer];
 };
 exports.insertTimerIntoDOM = insertTimerIntoDOM;
 var createDOMElement = function (type, className, parent, text) {
@@ -104,18 +115,20 @@ var changeTimeToString = function (minutes, seconds) {
     return stringMinutes + ":" + stringSeconds;
 };
 exports.changeTimeToString = changeTimeToString;
-var updateDOMTimer = function (timerOne, timerTwo) {
-    var player1timer = DOMTimers[0];
-    var player2timer = DOMTimers[1];
+var updateDOMTimer = function () {
+    var player1timer = exports.DOMTimers[0];
+    var player2timer = exports.DOMTimers[1];
     var interval = setInterval(function () {
-        if ((timerOne.minutes === 0 && timerOne.seconds == 0) ||
-            (timerTwo.minutes === 0 && timerTwo.seconds == 0) ||
-            cancelTimer)
+        if ((Timers[0].minutes === 0 && Timers[0].seconds == 0) ||
+            (Timers[1].minutes === 0 && Timers[1].seconds == 0) ||
+            exports.CANCELTIMER.flag)
             clearInterval(interval);
-        player1timer.innerText = exports.changeTimeToString(timerOne.minutes, timerOne.seconds);
-        player2timer.innerText = exports.changeTimeToString(timerTwo.minutes, timerTwo.seconds);
+        player1timer.innerText = exports.changeTimeToString(Timers[0].minutes, Timers[0].seconds);
+        player2timer.innerText = exports.changeTimeToString(Timers[1].minutes, Timers[1].seconds);
     }, 1000);
 };
+exports.updateDOMTimer = updateDOMTimer;
 var turnTimerOffFaster = function () {
-    cancelTimer = true;
+    exports.CANCELTIMER.flag = true;
 };
+exports.turnTimerOffFaster = turnTimerOffFaster;

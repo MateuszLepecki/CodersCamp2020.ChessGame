@@ -37,18 +37,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = exports.gameSettings = void 0;
-var startScreen_1 = require("./startScreen");
-exports.gameSettings = {
-    choosenTime: 10,
-    choosenSkin: 'G'
+
 };
 function App(_a) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_b) {
-            startScreen_1.createStartScreen();
-            return [2 /*return*/];
         });
     });
 }
 exports.App = App;
-;
