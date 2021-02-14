@@ -1,4 +1,4 @@
-import { Piece, coordinates } from './PieceClass';
+import { Piece, coordinates } from './Piece';
 import { getAreaArrayIndex } from './logic';
 import { AREASARRAY } from './logic';
 

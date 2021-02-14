@@ -44,10 +44,10 @@ function chessboard() {
                 }
                 square.classList.add('square');
                 if (j % 2 === 0) {
-                    square.style.backgroundColor = '#6C1A31';
+                    square.classList.add('firstColor');
                 }
                 else {
-                    square.style.backgroundColor = '#D67E03';
+                    square.classList.add('secondColor');
                 }
                 row.appendChild(square);
             }

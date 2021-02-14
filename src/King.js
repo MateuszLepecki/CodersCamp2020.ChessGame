@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.King = void 0;
-var PieceClass_1 = require("./PieceClass");
+var Piece_1 = require("./Piece");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
 var timer_1 = require("./app/timer");
@@ -68,9 +68,9 @@ var King = /** @class */ (function (_super) {
                 checkingPosition[1] > 8)
                 continue;
             var PieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-            if (PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color == this.color)
+            if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color == this.color)
                 continue;
-            else if (PieceOnWay instanceof PieceClass_1.Piece && PieceOnWay.color !== this.color) {
+            else if (PieceOnWay instanceof Piece_1.Piece && PieceOnWay.color !== this.color) {
                 this.possibleLocations.push(checkingPosition);
                 continue;
             }
@@ -84,7 +84,7 @@ var King = /** @class */ (function (_super) {
         this.possibleLocations.forEach(function (kingPossibleLocation) {
             var enemyCounter = 0;
             logic_2.AREASARRAY.forEach(function (el) {
-                if (el.piece instanceof PieceClass_1.Piece && el.piece.color != _this.color) {
+                if (el.piece instanceof Piece_1.Piece && el.piece.color != _this.color) {
                     el.piece.checkPossibleMoves();
                     el.piece.possibleLocations.forEach(function (enemyPossibleLoaction) {
                         if (kingPossibleLocation[0] == enemyPossibleLoaction[0] &&
@@ -107,5 +107,5 @@ var King = /** @class */ (function (_super) {
         }
     };
     return King;
-}(PieceClass_1.Piece));
+}(Piece_1.Piece));
 exports.King = King;

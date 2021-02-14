@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pawn = void 0;
-var PieceClass_1 = require("./PieceClass");
+var Piece_1 = require("./Piece");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
 var Pawn = /** @class */ (function (_super) {
@@ -38,9 +38,9 @@ var Pawn = /** @class */ (function (_super) {
                 checkingPosition[1] > 8)
                 continue;
             var pieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-            if (pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color == this.color)
+            if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color == this.color)
                 continue;
-            else if ((i === 0 || i === 2) && pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color !== this.color) {
+            else if ((i === 0 || i === 2) && pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color) {
                 if (pieceOnWay.type == 'king')
                     this.check = true;
                 this.possibleLocations.push(checkingPosition);
@@ -48,7 +48,7 @@ var Pawn = /** @class */ (function (_super) {
             }
             else if (i === 0 ||
                 i === 2 ||
-                (i === 1 && pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color !== this.color)) {
+                (i === 1 && pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color)) {
                 continue;
             }
             this.possibleLocations.push(checkingPosition);
@@ -66,5 +66,5 @@ var Pawn = /** @class */ (function (_super) {
         }
     };
     return Pawn;
-}(PieceClass_1.Piece));
+}(Piece_1.Piece));
 exports.Pawn = Pawn;

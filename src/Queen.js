@@ -13,31 +13,49 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Bishop = void 0;
-var PieceClass_1 = require("./PieceClass");
+exports.Queen = void 0;
+var Piece_1 = require("./Piece");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
-var Bishop = /** @class */ (function (_super) {
-    __extends(Bishop, _super);
-    function Bishop(color, location) {
-        return _super.call(this, 'bishop', color, location) || this;
+var Queen = /** @class */ (function (_super) {
+    __extends(Queen, _super);
+    function Queen(color, location) {
+        var _this = this;
+        if (color == 'white')
+            location = [4, 1];
+        else
+            location = [4, 8];
+        _this = _super.call(this, 'queen', color, location) || this;
+        return _this;
     }
-    Bishop.prototype.checkPossibleMoves = function () {
+    Queen.prototype.checkPossibleMoves = function () {
         this.check = false;
         this.possibleLocations = [];
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 8; i++) {
             var dir = [0, 0];
             switch (i) {
                 case 0:
-                    dir = [1, 1];
+                    dir = [1, 0];
                     break;
                 case 1:
-                    dir = [-1, 1];
+                    dir = [-1, 0];
                     break;
                 case 2:
-                    dir = [1, -1];
+                    dir = [0, 1];
                     break;
                 case 3:
+                    dir = [0, -1];
+                    break;
+                case 4:
+                    dir = [1, 1];
+                    break;
+                case 5:
+                    dir = [-1, 1];
+                    break;
+                case 6:
+                    dir = [1, -1];
+                    break;
+                case 7:
                     dir = [-1, -1];
                     break;
             }
@@ -49,9 +67,9 @@ var Bishop = /** @class */ (function (_super) {
                     checkingPosition[1] > 8)
                     break;
                 var pieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-                if (pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color == this.color)
+                if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color == this.color)
                     break;
-                else if (pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color !== this.color) {
+                else if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color) {
                     if (pieceOnWay.type == 'king')
                         this.check = true;
                     this.possibleLocations.push(checkingPosition);
@@ -61,6 +79,6 @@ var Bishop = /** @class */ (function (_super) {
             }
         }
     };
-    return Bishop;
-}(PieceClass_1.Piece));
-exports.Bishop = Bishop;
+    return Queen;
+}(Piece_1.Piece));
+exports.Queen = Queen;

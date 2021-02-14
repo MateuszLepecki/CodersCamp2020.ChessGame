@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Knight = void 0;
-var PieceClass_1 = require("./PieceClass");
+var Piece_1 = require("./Piece");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
 var Knight = /** @class */ (function (_super) {
@@ -60,9 +60,9 @@ var Knight = /** @class */ (function (_super) {
                 checkingPosition[1] > 8)
                 continue;
             var pieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-            if (pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color == this.color)
+            if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color == this.color)
                 continue;
-            else if (pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color !== this.color) {
+            else if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color) {
                 if (pieceOnWay.type == 'king')
                     this.check = true;
                 this.possibleLocations.push(checkingPosition);
@@ -72,5 +72,5 @@ var Knight = /** @class */ (function (_super) {
         }
     };
     return Knight;
-}(PieceClass_1.Piece));
+}(Piece_1.Piece));
 exports.Knight = Knight;

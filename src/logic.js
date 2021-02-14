@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkIfchecked = exports.deleteHighlightedSquares = exports.getAreaArrayIndex = exports.listenDOMchessboard = exports.changeArrayCoordinatesToString = exports.createBoardArray = exports.CHECK = exports.AREASARRAY = void 0;
-var PieceClass_1 = require("./PieceClass");
-var KingClass_1 = require("./KingClass");
-var QueenClass_1 = require("./QueenClass");
-var RookClass_1 = require("./RookClass");
-var BishopClass_1 = require("./BishopClass");
-var PawnClass_1 = require("./PawnClass");
-var KnightClass_1 = require("./KnightClass");
+var Piece_1 = require("./Piece");
+var King_1 = require("./King");
+var Queen_1 = require("./Queen");
+var Rook_1 = require("./Rook");
+var Bishop_1 = require("./Bishop");
+var Pawn_1 = require("./Pawn");
+var Knight_1 = require("./Knight");
 exports.AREASARRAY = [];
 var BOARD = document.querySelector('.board');
 exports.CHECK = false;
@@ -52,25 +52,25 @@ var createBoardArray = function () {
 };
 exports.createBoardArray = createBoardArray;
 var insertPieces = function () {
-    var kingW = new KingClass_1.King('white');
-    var kingB = new KingClass_1.King('black');
-    var queenW = new QueenClass_1.Queen('white');
-    var queenB = new QueenClass_1.Queen('black');
-    var rockW1 = new RookClass_1.Rook('white', [1, 1]);
-    var rockW2 = new RookClass_1.Rook('white', [8, 1]);
-    var rockB1 = new RookClass_1.Rook('black', [1, 8]);
-    var rockB2 = new RookClass_1.Rook('black', [8, 8]);
-    var bishopW1 = new BishopClass_1.Bishop('white', [3, 1]);
-    var bishopW2 = new BishopClass_1.Bishop('white', [6, 1]);
-    var bishopB1 = new BishopClass_1.Bishop('black', [3, 8]);
-    var bishopB2 = new BishopClass_1.Bishop('black', [6, 8]);
-    var knightW1 = new KnightClass_1.Knight('white', [2, 1]);
-    var knightW2 = new KnightClass_1.Knight('white', [7, 1]);
-    var knightB1 = new KnightClass_1.Knight('black', [2, 8]);
-    var knightB2 = new KnightClass_1.Knight('black', [7, 8]);
+    var kingW = new King_1.King('white');
+    var kingB = new King_1.King('black');
+    var queenW = new Queen_1.Queen('white');
+    var queenB = new Queen_1.Queen('black');
+    var rockW1 = new Rook_1.Rook('white', [1, 1]);
+    var rockW2 = new Rook_1.Rook('white', [8, 1]);
+    var rockB1 = new Rook_1.Rook('black', [1, 8]);
+    var rockB2 = new Rook_1.Rook('black', [8, 8]);
+    var bishopW1 = new Bishop_1.Bishop('white', [3, 1]);
+    var bishopW2 = new Bishop_1.Bishop('white', [6, 1]);
+    var bishopB1 = new Bishop_1.Bishop('black', [3, 8]);
+    var bishopB2 = new Bishop_1.Bishop('black', [6, 8]);
+    var knightW1 = new Knight_1.Knight('white', [2, 1]);
+    var knightW2 = new Knight_1.Knight('white', [7, 1]);
+    var knightB1 = new Knight_1.Knight('black', [2, 8]);
+    var knightB2 = new Knight_1.Knight('black', [7, 8]);
     for (var i = 1; i < 9; i++) {
-        var pawnW = new PawnClass_1.Pawn('white', [i, 2]);
-        var pawnB = new PawnClass_1.Pawn('black', [i, 7]);
+        var pawnW = new Pawn_1.Pawn('white', [i, 2]);
+        var pawnB = new Pawn_1.Pawn('black', [i, 7]);
     }
     console.table(exports.AREASARRAY);
 };
@@ -96,7 +96,7 @@ var listenSelection = function (e) {
         var arr = changeStringCoordinatesToArray(stringCoordinates);
         var index = exports.getAreaArrayIndex(arr);
         exports.deleteHighlightedSquares();
-        if (exports.AREASARRAY[index].piece instanceof PieceClass_1.Piece) {
+        if (exports.AREASARRAY[index].piece instanceof Piece_1.Piece) {
             selectPiece(arr);
             BOARD.removeEventListener('click', listenSelection);
         }
@@ -124,7 +124,7 @@ var selectPiece = function (position) {
             BOARD.addEventListener('click', listenSelection);
         }
     };
-    if (currentPiece instanceof PieceClass_1.Piece) {
+    if (currentPiece instanceof Piece_1.Piece) {
         BOARD.addEventListener('click', listenNewPosition);
     }
     else
@@ -148,10 +148,10 @@ exports.deleteHighlightedSquares = deleteHighlightedSquares;
 var checkIfchecked = function () {
     kingsIndexes = [];
     exports.AREASARRAY.forEach(function (el, index) {
-        if (el.piece instanceof PieceClass_1.Piece && el.piece.type == 'king') {
+        if (el.piece instanceof Piece_1.Piece && el.piece.type == 'king') {
             kingsIndexes.push(index);
         }
-        if (el.piece instanceof PieceClass_1.Piece && el.piece.type != 'king') {
+        if (el.piece instanceof Piece_1.Piece && el.piece.type != 'king') {
             el.piece.checkPossibleMoves();
             if (el.piece.check === true) {
                 console.log('check');
@@ -162,7 +162,7 @@ var checkIfchecked = function () {
     if (exports.CHECK == true) {
         kingsIndexes.forEach(function (el, index) {
             var king = exports.AREASARRAY[kingsIndexes[index]].piece;
-            if (king instanceof KingClass_1.King) {
+            if (king instanceof King_1.King) {
                 king.checkingIfMate();
             }
         });

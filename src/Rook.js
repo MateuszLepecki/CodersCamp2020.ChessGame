@@ -13,25 +13,19 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Queen = void 0;
-var PieceClass_1 = require("./PieceClass");
+exports.Rook = void 0;
+var Piece_1 = require("./Piece");
 var logic_1 = require("./logic");
 var logic_2 = require("./logic");
-var Queen = /** @class */ (function (_super) {
-    __extends(Queen, _super);
-    function Queen(color, location) {
-        var _this = this;
-        if (color == 'white')
-            location = [4, 1];
-        else
-            location = [4, 8];
-        _this = _super.call(this, 'queen', color, location) || this;
-        return _this;
+var Rook = /** @class */ (function (_super) {
+    __extends(Rook, _super);
+    function Rook(color, location) {
+        return _super.call(this, 'rock', color, location) || this;
     }
-    Queen.prototype.checkPossibleMoves = function () {
+    Rook.prototype.checkPossibleMoves = function () {
         this.check = false;
         this.possibleLocations = [];
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < 4; i++) {
             var dir = [0, 0];
             switch (i) {
                 case 0:
@@ -46,18 +40,6 @@ var Queen = /** @class */ (function (_super) {
                 case 3:
                     dir = [0, -1];
                     break;
-                case 4:
-                    dir = [1, 1];
-                    break;
-                case 5:
-                    dir = [-1, 1];
-                    break;
-                case 6:
-                    dir = [1, -1];
-                    break;
-                case 7:
-                    dir = [-1, -1];
-                    break;
             }
             for (var j = 1; j < 8; j++) {
                 var checkingPosition = [this.location[0] + j * dir[0], this.location[1] + j * dir[1]];
@@ -67,9 +49,9 @@ var Queen = /** @class */ (function (_super) {
                     checkingPosition[1] > 8)
                     break;
                 var pieceOnWay = logic_2.AREASARRAY[logic_1.getAreaArrayIndex(checkingPosition)].piece;
-                if (pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color == this.color)
+                if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color == this.color)
                     break;
-                else if (pieceOnWay instanceof PieceClass_1.Piece && pieceOnWay.color !== this.color) {
+                else if (pieceOnWay instanceof Piece_1.Piece && pieceOnWay.color !== this.color) {
                     if (pieceOnWay.type == 'king')
                         this.check = true;
                     this.possibleLocations.push(checkingPosition);
@@ -79,6 +61,6 @@ var Queen = /** @class */ (function (_super) {
             }
         }
     };
-    return Queen;
-}(PieceClass_1.Piece));
-exports.Queen = Queen;
+    return Rook;
+}(Piece_1.Piece));
+exports.Rook = Rook;
