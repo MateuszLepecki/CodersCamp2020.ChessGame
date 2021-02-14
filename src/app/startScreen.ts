@@ -1,6 +1,6 @@
-import logo from '../assets/logo/chess_logo_logo.svg';
 import { createTimeScreen } from '../timeRange'
 import { gameSettings } from '../app/App';
+const logo = require('../assets/logo/chess_logo_logo.svg');
 
 
 export function createStartScreen() {
@@ -16,7 +16,7 @@ export function createStartScreenStructure() {
 
     mainWrap!.appendChild(startWrap);
 
-    // createNewImgElement('logo', logo, startWrap);
+    createNewImgElement('logo', logo, startWrap);
 
     const housesWrap = createNewElement('div', 'houseswrap', startWrap);
     const housesG = createNewElement('button', 'btn houses G', housesWrap);

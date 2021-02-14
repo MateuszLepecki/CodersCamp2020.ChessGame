@@ -1,9 +1,9 @@
-import logo from './assets/logo/chess_logo_logo.svg';
 import { createNewElement, createNewImgElement } from './app/startScreen';
 import { gameSettings } from './app/App';
 import { chessboard } from './chessboard';
 import { listenDOMchessboard } from './logic';
 import { createBoardArray } from './logic';
+const logo = require('./assets/logo/chess_logo_logo.svg');
 
 const mainWrap = document.getElementById('main-wrap');
 
