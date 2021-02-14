@@ -1,9 +1,12 @@
+// const logo = require('./assets/logo/chess_logo_logo.svg');
+import logo from './assets/logo/chess_logo_logo.svg';
+
 const main = document.getElementById('main-wrap');
 const board = document.createElement('div');
 board.classList.add('board');
 const img = document.createElement('img');
 img.classList.add('img');
-img.src = '#';
+img.src = logo;
 const outerBoard = document.createElement('div');
 outerBoard.classList.add('outerBoard');
 const numbers = document.createElement('div');

@@ -1,12 +1,26 @@
 "use strict";
+<<<<<<< HEAD
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.chessboard = void 0;
+=======
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.chessboard = void 0;
+// const logo = require('./assets/logo/chess_logo_logo.svg');
+var chess_logo_logo_svg_1 = __importDefault(require("./assets/logo/chess_logo_logo.svg"));
+>>>>>>> mainScreen
 var main = document.getElementById('main-wrap');
 var board = document.createElement('div');
 board.classList.add('board');
 var img = document.createElement('img');
 img.classList.add('img');
+<<<<<<< HEAD
 img.src = '#';
+=======
+img.src = chess_logo_logo_svg_1.default;
+>>>>>>> mainScreen
 var outerBoard = document.createElement('div');
 outerBoard.classList.add('outerBoard');
 var numbers = document.createElement('div');
@@ -44,10 +58,17 @@ function chessboard() {
                 }
                 square.classList.add('square');
                 if (j % 2 === 0) {
+<<<<<<< HEAD
                     square.classList.add('firstColor');
                 }
                 else {
                     square.classList.add('secondColor');
+=======
+                    square.style.backgroundColor = '#6C1A31';
+                }
+                else {
+                    square.style.backgroundColor = '#D67E03';
+>>>>>>> mainScreen
                 }
                 row.appendChild(square);
             }

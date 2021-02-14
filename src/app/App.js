@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<< HEAD
 exports.App = exports.gameSettings = void 0;
 var chessboard_1 = require("../chessboard");
 var logic_1 = require("../logic");
@@ -44,10 +45,17 @@ var timer_1 = require("./timer");
 exports.gameSettings = {
     choosenTime: 1,
 };
+=======
+exports.App = void 0;
+var chessboard_1 = require("../chessboard");
+var logic_1 = require("../logic");
+var logic_2 = require("../logic");
+>>>>>>> mainScreen
 function App(_a) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_b) {
             switch (_b.label) {
+<<<<<<< HEAD
                 case 0: return [4 /*yield*/, chessboard_1.chessboard()];
                 case 1:
                     _b.sent();
@@ -55,9 +63,23 @@ function App(_a) {
                     timer_1.createTimers();
                     logic_1.listenDOMchessboard();
                     timer_1.updateDOMTimer();
+=======
+                case 0: 
+                // await createStartScreen();
+                return [4 /*yield*/, chessboard_1.chessboard()];
+                case 1:
+                    // await createStartScreen();
+                    _b.sent();
+                    logic_2.createBoardArray();
+                    logic_1.listenDOMchessboard();
+>>>>>>> mainScreen
                     return [2 /*return*/];
             }
         });
     });
 }
 exports.App = App;
+<<<<<<< HEAD
+=======
+;
+>>>>>>> mainScreen

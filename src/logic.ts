@@ -1,12 +1,12 @@
 export {};
 import { coordinates } from './Piece';
 import { Piece } from './Piece';
-import { King } from './King';
-import { Queen } from './Queen';
+import { King } from './king';
+import { Queen } from './queen';
 import { Rook } from './Rook';
-import { Bishop } from './Bishop';
-import { Pawn } from './Pawn';
-import { Knight } from './Knight';
+import { Bishop } from './bishop';
+import { Pawn } from './pawn';
+import { Knight } from './knight';
 
 export const AREASARRAY: Area[] = [];
 const BOARD = document.querySelector('.board')! as HTMLElement;
