@@ -8,8 +8,13 @@ import { Bishop } from './Bishop';
 import { Pawn } from './Pawn';
 import { Knight } from './Knight';
 
+const bishopW = require('./assets/pieces-svg/bishop_w.svg');
+const bishopB = require('./assets/pieces-svg/bishop_b.svg');
+
 export const AREASARRAY: Area[] = [];
-const BOARD = document.querySelector('.board')! as HTMLElement;
+let BOARD: HTMLElement;
+export let CHECK = false;
+let kingsIndexes: number[] = [];
 
 enum Letters {
     A,
@@ -38,11 +43,14 @@ class Area {
         const querySquare = document.querySelector(
             '.' + changeArrayCoordinatesToString(this.areaCoordinates),
         )! as HTMLElement;
-        querySquare.innerText = '';
+        // querySquare.innerText = '';
+        querySquare.innerHTML = '';
     }
 }
 
 export const createBoardArray = () => {
+    BOARD = document.querySelector('.board')! as HTMLElement;
+    AREASARRAY.splice(0, AREASARRAY.length);
     for (let row = 1; row < 9; row++) {
         for (let column = 1; column < 9; column++) {
             let newArea = new Area(row, column);
@@ -94,13 +102,18 @@ const changeStringCoordinatesToArray = (position: string): coordinates => {
     return resultArray;
 };
 const listenSelection = (e: Event) => {
-    let target: any = e.target!; // WHAT WILL BE THE PROPER TYPE ??
-    const stringCoordinates: string = target.classList[0];
-    let arr = changeStringCoordinatesToArray(stringCoordinates);
-    let index = getAreaArrayIndex(arr);
-    if (AREASARRAY[index].piece instanceof Piece) {
-        selectPiece(arr);
-        BOARD.removeEventListener('click', listenSelection);
+    let target;
+    if (e.target instanceof HTMLElement) {
+        target = e.target.parentNode as HTMLDivElement;
+        const stringCoordinates: string = target.classList[0];
+        let arr = changeStringCoordinatesToArray(stringCoordinates);
+        let index = getAreaArrayIndex(arr);
+        deleteHighlightedSquares();
+
+        if (AREASARRAY[index].piece instanceof Piece) {
+            selectPiece(arr);
+            BOARD.removeEventListener('click', listenSelection);
+        }
     }
 };
 export const listenDOMchessboard = () => {
@@ -110,13 +123,19 @@ const selectPiece = (position: coordinates) => {
     BOARD.removeEventListener('click', listenSelection);
     let index = getAreaArrayIndex(position);
     const currentPiece = AREASARRAY[index].piece! as Piece;
+    currentPiece.checkPossibleMoves();
+    currentPiece.highlightPossibilities();
     const listenNewPosition = (e: Event) => {
-        let target: any = e.target!; // WHAT WILL BE THE PROPER TYPE ??
-        const stringCoordinates: string = target.classList[0];
-        let arr = changeStringCoordinatesToArray(stringCoordinates);
-        currentPiece.moveIfPossible(arr);
-        BOARD.removeEventListener('click', listenNewPosition);
-        BOARD.addEventListener('click', listenSelection);
+        let target;
+        if (e.target instanceof HTMLElement) {
+            target = e.target;
+            const stringCoordinates: string = target.classList[0];
+            let arr = changeStringCoordinatesToArray(stringCoordinates);
+            currentPiece.moveIfPossible(arr);
+            checkIfchecked();
+            BOARD.removeEventListener('click', listenNewPosition);
+            BOARD.addEventListener('click', listenSelection);
+        }
     };
     if (currentPiece instanceof Piece) {
         BOARD.addEventListener('click', listenNewPosition);
@@ -128,4 +147,36 @@ export const getAreaArrayIndex = (coordinates: coordinates): number => {
         if (e.areaCoordinates[0] == coordinates[0] && e.areaCoordinates[1] == coordinates[1]) return e;
     });
     return index;
+};
+
+export const deleteHighlightedSquares = (): void => {
+    const highlighted = document.querySelectorAll('.possibileMoves');
+    highlighted.forEach((el) => {
+        el.classList.remove('possibileMoves');
+    });
+};
+
+export const checkIfchecked = () => {
+    kingsIndexes = [];
+    AREASARRAY.forEach((el, index) => {
+        if (el.piece instanceof Piece && el.piece.type == 'king') {
+            kingsIndexes.push(index);
+        }
+        if (el.piece instanceof Piece && el.piece.type != 'king') {
+            el.piece.checkPossibleMoves();
+            if (el.piece.check === true) {
+                console.log('check');
+                CHECK = true;
+            }
+        }
+    });
+    if (CHECK == true) {
+        kingsIndexes.forEach((el, index) => {
+            let king = AREASARRAY[kingsIndexes[index]].piece;
+            if (king instanceof King) {
+                king.checkingIfMate();
+            }
+        });
+    }
+    CHECK = false;
 };
