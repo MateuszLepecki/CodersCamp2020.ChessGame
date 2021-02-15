@@ -1,6 +1,6 @@
 import { createNewElement, createNewImgElement } from './app/startScreen';
 import { gameSettings } from './app/App';
-import { chessboard } from './chessboard';
+import { createChessboardScreen } from './chessboard';
 import { listenDOMchessboard } from './logic';
 import { createBoardArray } from './logic';
 import { switchTimers, updateDOMTimer, createTimers } from './app/timer';
@@ -8,13 +8,13 @@ const logo = require('./assets/logo/chess_logo_logo.svg');
 
 const mainWrap = document.getElementById('main-wrap');
 
-function createChessboard() {
-    chessboard();
+async function createChessboard() {
+    await createChessboardScreen();
 
     createBoardArray();
 
     listenDOMchessboard();
-
+    createTimers();
     updateDOMTimer();
 }
 
