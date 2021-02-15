@@ -1,10 +1,13 @@
-// import logo from '../assets/logo/chess_logo_logo.svg';
+import { createTimeScreen } from '../timeRange'
+import { gameSettings } from '../app/App';
+const logo = require('../assets/logo/chess_logo_logo.svg');
+
 
 export function createStartScreen() {
     createStartScreenStructure();
 }
 
-function createStartScreenStructure() {
+export function createStartScreenStructure() {
     const mainWrap = document.getElementById('main-wrap');
     mainWrap!.innerHTML = '';
 
@@ -13,26 +16,31 @@ function createStartScreenStructure() {
 
     mainWrap!.appendChild(startWrap);
 
-    // createNewImgElement('logo', logo, startWrap);
+    createNewImgElement('logo', logo, startWrap);
 
     const housesWrap = createNewElement('div', 'houseswrap', startWrap);
-    const housesG = createNewElement('button', 'houses', housesWrap);
-    const housesH = createNewElement('button', 'houses', housesWrap);
-    const housesR = createNewElement('button', 'houses', housesWrap);
-    const housesS = createNewElement('button', 'houses', housesWrap);
-    createNewElement('div', 'G housestext', housesG, 'G');
-    createNewElement('div', 'H housestext', housesH, 'H');
-    createNewElement('div', 'R housestext', housesR, 'R');
-    createNewElement('div', 'S housestext', housesS, 'S');
+    const housesG = createNewElement('button', 'btn houses G', housesWrap);
+    const housesH = createNewElement('button', 'btn houses H', housesWrap);
+    const housesR = createNewElement('button', 'btn houses R', housesWrap);
+    const housesS = createNewElement('button', 'btn houses S', housesWrap);
+    createNewElement('div', 'housestext', housesG, 'G');
+    createNewElement('div', 'housestext', housesH, 'H');
+    createNewElement('div', 'housestext', housesR, 'R');
+    createNewElement('div', 'housestext', housesS, 'S');
 
     const START_BTN = 'pick and play';
 
     const startBtn = createNewElement('button', 'btn startbtn', startWrap, START_BTN);
 
+    housesG.addEventListener('click', chooseHouseListener);
+    housesH.addEventListener('click', chooseHouseListener);
+    housesR.addEventListener('click', chooseHouseListener);
+    housesS.addEventListener('click', chooseHouseListener);
+    startBtn.addEventListener('click', createTimeScreen);
 
 }
 
-function createNewImgElement(className: string, source: string, parent: HTMLElement) {
+export function createNewImgElement(className: string, source: string, parent: HTMLElement) {
     const newImgElement = document.createElement('img');
     newImgElement.className = className;
     newImgElement.src = source;
@@ -40,7 +48,7 @@ function createNewImgElement(className: string, source: string, parent: HTMLElem
     return newImgElement;
 }
 
-function createNewElement(tag: string, className: string, parent: HTMLElement, text: string = '') {
+export function createNewElement(tag: string, className: string, parent: HTMLElement, text: string = '') {
     const newElement = document.createElement(tag);
     newElement.className = className;
     newElement.innerHTML = text;
@@ -48,3 +56,15 @@ function createNewElement(tag: string, className: string, parent: HTMLElement, t
     return newElement;
 }
 
+export function chooseHouseListener(this: HTMLElement) {
+    console.log(`Clicked: ${this.classList[2]}`);
+    if (this.classList[2] === 'G'){
+        gameSettings.choosenSkin = 'G';
+    } else if (this.classList[2] === 'H'){
+        gameSettings.choosenSkin = 'H';
+    } else if (this.classList[2] === 'R'){
+        gameSettings.choosenSkin = 'R';
+    } else if (this.classList[2] === 'S'){
+        gameSettings.choosenSkin = 'S';
+    }
+}
