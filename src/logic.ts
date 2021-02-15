@@ -13,7 +13,7 @@ const bishopW = require('./assets/pieces-svg/bishop_w.svg');
 const bishopB = require('./assets/pieces-svg/bishop_b.svg');
 
 export const AREASARRAY: Area[] = [];
-const BOARD = document.querySelector('.board')! as HTMLElement;
+let BOARD: HTMLElement;
 export let CHECK = false;
 let kingsIndexes: number[] = [];
 var movenumber = 0;
@@ -51,6 +51,7 @@ class Area {
 }
 
 export const createBoardArray = () => {
+    BOARD = document.querySelector('.board')! as HTMLElement;
     AREASARRAY.splice(0, AREASARRAY.length);
     for (let row = 1; row < 9; row++) {
         for (let column = 1; column < 9; column++) {
