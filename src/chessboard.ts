@@ -76,6 +76,10 @@ export function chessboard() {
         titlemoves.classList.add('moves-title');
         titlemoves.innerText = 'Moves:';
         listOfMoves.appendChild(titlemoves);
+
+        let allmoves = document.createElement('div');
+        allmoves.classList.add('moves-list');
+        listOfMoves.appendChild(allmoves);
     
    }
     getBoard();

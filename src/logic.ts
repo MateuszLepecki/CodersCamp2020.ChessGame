@@ -7,6 +7,7 @@ import { Rook } from './Rook';
 import { Bishop } from './Bishop';
 import { Pawn } from './Pawn';
 import { Knight } from './Knight';
+import { whichColorTurn } from './app/timer';
 
 const bishopW = require('./assets/pieces-svg/bishop_w.svg');
 const bishopB = require('./assets/pieces-svg/bishop_b.svg');
@@ -15,7 +16,7 @@ export const AREASARRAY: Area[] = [];
 const BOARD = document.querySelector('.board')! as HTMLElement;
 export let CHECK = false;
 let kingsIndexes: number[] = [];
-var movenumber = 1;
+var movenumber = 0;
 
 enum Letters {
     A,
@@ -137,7 +138,7 @@ const selectPiece = (position: coordinates) => {
             BOARD.addEventListener('click', listenSelection);
 
 
-            var movesdiv = document.getElementsByClassName("list-of-moves");
+            var movesdiv = document.getElementsByClassName("moves-list");
             var moveslist = movesdiv[0];
 
             switch (currentPiece.type) {
@@ -164,10 +165,15 @@ const selectPiece = (position: coordinates) => {
             if (currentPiece.check) {
                 var checkmark = "+";
             } else var checkmark = "";
-            console.log(currentPiece);
-            var y = document.createTextNode(movenumber+". "+piecetype+stringCoordinates.toLowerCase()+checkmark+" ");
+
+            if (whichColorTurn() === "black") {
+                movenumber++;
+                var y = document.createTextNode(movenumber+". "+piecetype+stringCoordinates.toLowerCase()+checkmark+" ");
+            }
+            else {
+                var y = document.createTextNode(piecetype+stringCoordinates.toLowerCase()+checkmark+" ");
+            }
             moveslist.appendChild(y);
-            movenumber++;
         }
     };
     if (currentPiece instanceof Piece) {
