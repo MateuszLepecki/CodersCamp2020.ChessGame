@@ -1,3 +1,7 @@
+:root {
+    --c: #d67e03;
+}
+
 #startwrap {
     display: grid;
     grid-template-areas:
@@ -115,7 +119,7 @@
 label[for='timeset'] {
     font-family: 'Oswald', sans-serif;
     font-size: 40px;
-    color: #d67e03;
+    color: var(--c);
     text-transform: uppercase;
 }
 
@@ -141,7 +145,7 @@ input[type='range'] {
     margin: 0;
     width: 100%;
     cursor: pointer;
-    background: #d67e03;
+    background: var(--c);
     border-radius: 50px;
     height: 5px;
   }
@@ -151,7 +155,7 @@ input[type='range'] {
     margin: 0;
     width: 100%;
     cursor: pointer;
-    background: #d67e03;
+    background: var(--c);
     border-radius: 50px;
     height: 5px;
   }
@@ -162,7 +166,7 @@ input[type='range'] {
     width: 100%;
     cursor: pointer;
     color: transparent;
-    background: #d67e03;
+    background: var(--c);
     border-radius: 50px;
     height: 5px;
   }
@@ -176,7 +180,7 @@ input[type='range'] {
     height: 1.5rem;
     width: 1.5rem;
     border-radius: .75rem;
-    background: #d67e03;
+    background: var(--c);
     cursor: pointer;
     margin-top: -10px;
   }
@@ -186,7 +190,7 @@ input[type='range'] {
     height: 1.5rem;
     width: 1.5rem;
     border-radius: 0.75rem;
-    background: #d67e03;
+    background: var(--c);
     cursor: pointer;
     margin-top: -14px;
     border: transparent;
@@ -196,7 +200,7 @@ input[type='range'] {
     height: 1.5rem;
     width: 1.5rem;
     border-radius: 0.75rem;
-    background: #d67e03;
+    background: var(--c);
     cursor: pointer;
     margin-top: -14px;
   }

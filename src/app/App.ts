@@ -8,16 +8,16 @@ import { createTimeScreen } from '../timeRange';
 
 export const gameSettings = {
 	choosenTime: 10,
-	choosenSkin: 'G'
+	choosenSkin: 'S'
 }
 
-export function App({}) {
+export async function App({}) {
     createStartScreen();
     // await chessboard();
 
-	//createBoardArray();
-	//createTimers();
-    //listenDOMchessboard();
+	// createBoardArray();
+	// createTimers();
+    // listenDOMchessboard();
 
     //updateDOMTimer();
 }

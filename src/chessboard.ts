@@ -1,5 +1,7 @@
 const logo = require('./assets/logo/chess_logo_logo.svg');
 // import logo from './assets/logo/chess_logo_logo.svg';
+import { gameSettings } from './app/App';
+import { deleteHighlightedSquares } from './logic';
 
 const main = document.getElementById('main-wrap');
 const board = document.createElement('div');
@@ -73,4 +75,25 @@ export function chessboard() {
     getBoard();
     getNumbers();
     getLetters();
+    setBoardColor();
+}
+
+function setBoardColor() {
+    let squareOne = document.getElementsByClassName('firstColor') as HTMLCollectionOf<HTMLElement>;
+    let squareTwo = document.getElementsByClassName('secondColor') as HTMLCollectionOf<HTMLElement>;
+    for (let i = 0; i < squareOne.length; i++) {
+        if(gameSettings.choosenSkin === 'G'){
+            squareOne[i].style.backgroundColor = '#d67e03';
+            squareTwo[i].style.backgroundColor = '#6c1a31';
+        } else if(gameSettings.choosenSkin === 'H'){
+            squareOne[i].style.backgroundColor = '#5e3225';
+            squareTwo[i].style.backgroundColor = '#ba7625';
+        } else if(gameSettings.choosenSkin === 'R'){
+            squareOne[i].style.backgroundColor = '#7b9bc1';
+            squareTwo[i].style.backgroundColor = '#063f53';
+        } else if(gameSettings.choosenSkin === 'S'){
+            squareOne[i].style.backgroundColor = '#8b8a8f';
+            squareTwo[i].style.backgroundColor = '#134731';
+        }
+    }
 }
