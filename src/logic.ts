@@ -15,6 +15,7 @@ export const AREASARRAY: Area[] = [];
 const BOARD = document.querySelector('.board')! as HTMLElement;
 export let CHECK = false;
 let kingsIndexes: number[] = [];
+var movenumber = 1;
 
 enum Letters {
     A,
@@ -134,12 +135,46 @@ const selectPiece = (position: coordinates) => {
             checkIfchecked();
             BOARD.removeEventListener('click', listenNewPosition);
             BOARD.addEventListener('click', listenSelection);
+
+
+            var movesdiv = document.getElementsByClassName("list-of-moves");
+            var moveslist = movesdiv[0];
+
+            switch (currentPiece.type) {
+                case 'knight':
+                    var piecetype: string = "K";
+                    break;
+                case 'bishop':
+                    var piecetype: string = "B";
+                    break;
+                case 'rook':
+                    var piecetype: string = "R";
+                    break;
+                case 'queen':
+                    var piecetype: string = "Q";
+                    break;
+                case 'king':
+                    var piecetype: string = "K";
+                    break;
+                default:
+                    var piecetype: string = "";
+                    break;
+            }
+            
+            if (currentPiece.check) {
+                var checkmark = "+";
+            } else var checkmark = "";
+            console.log(currentPiece);
+            var y = document.createTextNode(movenumber+". "+piecetype+stringCoordinates.toLowerCase()+checkmark+" ");
+            moveslist.appendChild(y);
+            movenumber++;
         }
     };
     if (currentPiece instanceof Piece) {
         BOARD.addEventListener('click', listenNewPosition);
     } else BOARD.addEventListener('click', listenSelection);
 };
+
 
 export const getAreaArrayIndex = (coordinates: coordinates): number => {
     let index = AREASARRAY.findIndex((e) => {

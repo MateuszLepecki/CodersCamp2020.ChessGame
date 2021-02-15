@@ -70,7 +70,16 @@ export function chessboard() {
             letters.appendChild(letter);
         }
     }
+
+   function getMoves() {
+        let titlemoves = document.createElement('div');
+        titlemoves.classList.add('moves-title');
+        titlemoves.innerText = 'Moves:';
+        listOfMoves.appendChild(titlemoves);
+    
+   }
     getBoard();
     getNumbers();
     getLetters();
+    getMoves();
 }
