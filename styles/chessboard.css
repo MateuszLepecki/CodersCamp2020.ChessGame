@@ -10,10 +10,9 @@ body {
 }
 .img {
     position: absolute;
-    left: 50%;
+    margin: 0 auto;
     top: 5%;
-    width: 8vw;
-    height: auto;
+    width: 10%;
 }
 #main-wrap {
     height: 100vh;
@@ -32,7 +31,8 @@ body {
     justify-content: space-evenly;
     align-items: flex-end;
 }
-.number, .letter {
+.number,
+.letter {
     font-family: 'Oswald', sans-serif;
     font-size: 25px;
     color: white;
@@ -50,10 +50,10 @@ body {
     border: 3px solid #191919;
 }
 .firstColor {
-    background-color: #D67E03;
+    background-color: #d67e03;
 }
 .secondColor {
-    background-color: #6C1A31;
+    background-color: #6c1a31;
 }
 .square {
     width: 100%;

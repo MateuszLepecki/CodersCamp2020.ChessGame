@@ -1,17 +1,23 @@
+import { createStartScreen } from './startScreen';
 import { chessboard } from '../chessboard';
 import { listenDOMchessboard } from '../logic';
 import { createBoardArray } from '../logic';
-import { createTimers } from './timer';
-export async function App ({})  {
+import { switchTimers, updateDOMTimer, createTimers } from './timer';
 
-	await chessboard();
+import { createTimeScreen } from '../timeRange';
 
-	createBoardArray();
-
-	listenDOMchessboard();
-	
-	createTimers();
-};
 export const gameSettings = {
-	choosenTime : 4, 
-   };
+	choosenTime: 10,
+	choosenSkin: 'G'
+}
+
+export function App({}) {
+    createStartScreen();
+    // await chessboard();
+
+	//createBoardArray();
+	//createTimers();
+    //listenDOMchessboard();
+
+    //updateDOMTimer();
+}

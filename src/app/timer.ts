@@ -2,14 +2,19 @@ import { gameSettings } from './App';
 
 const MAIN = document.querySelector('#main-wrap');
 const DIV_ELEMENT = 'div';
-let cancelTimer: boolean = false;
-let DOMTimers: HTMLElement[] = [];
+export let CANCELTIMER = {
+    flag: false,
+};
+export let DOMTimers: HTMLElement[] = [];
+
+let Timers: Timer[] = [];
 
 export class Timer {
     minutes: number;
     seconds: number;
     stopped: boolean;
     player: string;
+    endOftime: boolean = false;
 
     constructor(initialTime: number, player: string) {
         this.minutes = initialTime;
@@ -26,7 +31,7 @@ export class Timer {
             this.seconds--;
             // this.showRemainingTime();
             if (this.seconds === 0 && this.minutes === 0) {
-                this.endOfTime();
+                this.endOfTimeMethod();
                 clearInterval(interval);
             }
         }, 1000);
@@ -43,42 +48,45 @@ export class Timer {
     // showRemainingTime(): void {
     //     console.log(`${this.color} - time left: ${this.minutes}:${this.seconds}`);
     // }
-    endOfTime(): void {
+    endOfTimeMethod(): void {
+        this.endOftime = true;
         console.log('End of time - you lose');
+        if (MAIN instanceof HTMLElement) {
+            const youLoseDiv = createDOMElement(DIV_ELEMENT, 'youLose', MAIN);
+            youLoseDiv.innerText = "YOU LOSE!";
+        }
     }
 }
 
-export const createTimers = (): void => {
-    cancelTimer = false;
-    const timerOne = new Timer(gameSettings.choosenTime, 'one');
-    const timerTwo = new Timer(gameSettings.choosenTime, 'two');
-    timerOne.startCounting();
-    setTimeout(() => {
-        switchTimers(timerOne, timerTwo);
-    }, 10000);
-
-    setTimeout(() => {
-        switchTimers(timerOne, timerTwo);
-    }, 24000);
-    DOMTimers = insertTimerIntoDOM(timerOne, timerTwo);
-    updateDOMTimer(timerOne, timerTwo);
+export const whichColorTurn = (): string => {
+    if (Timers[0].stopped === false) return 'white';
+    if (Timers[0].endOftime === true || Timers[1].endOftime === true || CANCELTIMER.flag===true) return 'endOfTime';
+    else return 'black';
 };
 
-export const switchTimers = (timerWhite: Timer, timerBlack: Timer): void => {
-    if (timerBlack.stopped === true && timerWhite.stopped === false) {
-        timerWhite.stopCounting();
-        timerBlack.startCounting();
+export const createTimers = (): void => {
+    Timers[0] = new Timer(gameSettings.choosenTime, 'white');
+    Timers[1] = new Timer(gameSettings.choosenTime, 'black');
+    Timers[0].startCounting();
+    insertTimerIntoDOM();
+    updateDOMTimer();
+};
+
+export const switchTimers = (): void => {
+    if (Timers[1].stopped === true && Timers[0].stopped === false) {
+        Timers[0].stopCounting();
+        Timers[1].startCounting();
     } else {
-        timerBlack.stopCounting();
-        timerWhite.startCounting();
+        Timers[1].stopCounting();
+        Timers[0].startCounting();
     }
 };
 
-export const insertTimerIntoDOM = (timerOne: Timer, timerTwo: Timer): HTMLElement[] => {
+export const insertTimerIntoDOM = (): void => {
     const timersWrapper = createDOMElement(DIV_ELEMENT, 'timerWrapper', MAIN as HTMLElement);
     const player1timer = createDOMElement(DIV_ELEMENT, 'player1timer timer', timersWrapper);
     const player2timer = createDOMElement(DIV_ELEMENT, 'player2timer timer', timersWrapper);
-    return [player1timer, player2timer];
+    DOMTimers = [player1timer, player2timer];
 };
 
 export const createDOMElement = (type: string, className: string, parent: HTMLElement, text = ''): HTMLElement => {
@@ -104,23 +112,22 @@ export const changeTimeToString = (minutes: number, seconds: number) => {
     return `${stringMinutes}:${stringSeconds}`;
 };
 
-const updateDOMTimer = (timerOne: Timer, timerTwo: Timer) => {
+export const updateDOMTimer = () => {
     const player1timer = DOMTimers[0];
     const player2timer = DOMTimers[1];
     let interval = setInterval(() => {
         if (
-            (timerOne.minutes === 0 && timerOne.seconds == 0) ||
-            (timerTwo.minutes === 0 && timerTwo.seconds == 0) ||
-            cancelTimer
+            (Timers[0].minutes === 0 && Timers[0].seconds == 0) ||
+            (Timers[1].minutes === 0 && Timers[1].seconds == 0) ||
+            CANCELTIMER.flag
         )
             clearInterval(interval);
 
-        player1timer.innerText = changeTimeToString(timerOne.minutes, timerOne.seconds);
-        player2timer.innerText = changeTimeToString(timerTwo.minutes, timerTwo.seconds);
+        player1timer.innerText = changeTimeToString(Timers[0].minutes, Timers[0].seconds);
+        player2timer.innerText = changeTimeToString(Timers[1].minutes, Timers[1].seconds);
     }, 1000);
 };
 
-const turnTimerOffFaster = () => {
-    cancelTimer = true;
+export const turnTimerOffFaster = () => {
+    CANCELTIMER.flag = true;
 };
-
