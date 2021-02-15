@@ -1,31 +1,38 @@
 const logo = require('./assets/logo/chess_logo_logo.svg');
 // import logo from './assets/logo/chess_logo_logo.svg';
+import { gameSettings } from './app/App';
+import { deleteHighlightedSquares } from './logic';
 
-const main = document.getElementById('main-wrap');
-const board = document.createElement('div');
-board.classList.add('board');
-const img = document.createElement('img');
-img.classList.add('img');
-img.src = logo;
-const outerBoard = document.createElement('div');
-outerBoard.classList.add('outerBoard');
-const numbers = document.createElement('div');
-numbers.classList.add('numbers');
-const takenPawns = document.createElement('div');
-takenPawns.classList.add('taken-pawns');
-const listOfMoves = document.createElement('div');
-listOfMoves.classList.add('list-of-moves');
-main!.appendChild(img);
-main!.appendChild(numbers);
-main!.appendChild(outerBoard);
-main!.appendChild(takenPawns);
-main!.appendChild(listOfMoves);
-const letters = document.createElement('div');
-letters.classList.add('letters');
-outerBoard.appendChild(letters);
-outerBoard.appendChild(board);
+export function createChessboardScreen() {
+    chessboard();
+}
 
 export function chessboard() {
+    const main = document.getElementById('main-wrap');
+    main!.innerHTML = '';
+    const board = document.createElement('div');
+    board.classList.add('board');
+    const img = document.createElement('img');
+    img.classList.add('img');
+    img.src = logo;
+    const outerBoard = document.createElement('div');
+    outerBoard.classList.add('outerBoard');
+    const numbers = document.createElement('div');
+    numbers.classList.add('numbers');
+    const takenPawns = document.createElement('div');
+    takenPawns.classList.add('taken-pawns');
+    const listOfMoves = document.createElement('div');
+    listOfMoves.classList.add('list-of-moves');
+    main!.appendChild(img);
+    main!.appendChild(numbers);
+    main!.appendChild(outerBoard);
+    main!.appendChild(takenPawns);
+    main!.appendChild(listOfMoves);
+    const letters = document.createElement('div');
+    letters.classList.add('letters');
+    outerBoard.appendChild(letters);
+    outerBoard.appendChild(board);
+
     function getBoard() {
         for (let i = 8; i >= 1; i--) {
             let row = document.createElement('div');
@@ -73,4 +80,24 @@ export function chessboard() {
     getBoard();
     getNumbers();
     getLetters();
+    setBoardColor();
+}
+
+function setBoardColor() {
+    let root = document.documentElement;
+
+          if(gameSettings.choosenSkin === 'G'){
+            root.style.setProperty('--f', '#d67e03');
+            root.style.setProperty('--s', '#6c1a31');
+        } else if(gameSettings.choosenSkin === 'H'){
+            root.style.setProperty('--f', '#5e3225');
+            root.style.setProperty('--s', '#ba7625');
+        } else if(gameSettings.choosenSkin === 'R'){
+            root.style.setProperty('--f', '#7b9bc1');
+            root.style.setProperty('--s', '#063f53');
+        } else if(gameSettings.choosenSkin === 'S'){
+            root.style.setProperty('--f', '#8b8a8f');
+            root.style.setProperty('--s', '#063f53');
+        }
+    
 }

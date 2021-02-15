@@ -1,3 +1,8 @@
+:root {
+    --f: #d67e03;
+    --s: #6c1a31;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -50,10 +55,10 @@ body {
     border: 3px solid #191919;
 }
 .firstColor {
-    background-color: #d67e03;
+    background-color: var(--f);
 }
 .secondColor {
-    background-color: #6c1a31;
+    background-color: var(--s);
 }
 .square {
     width: 100%;
