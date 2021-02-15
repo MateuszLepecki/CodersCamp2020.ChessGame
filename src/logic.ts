@@ -167,13 +167,21 @@ const selectPiece = (position: coordinates) => {
             } else var checkmark = "";
 
             if (whichColorTurn() === "black") {
+                var allmoves = document.getElementsByClassName("moves-list");
+                var allmoveslist = allmoves[0];
+                var moveel = document.createElement('li');
+                moveel.classList.add('just-moves');
+                allmoveslist.appendChild(moveel);
+                var justmoves = document.getElementsByClassName('just-moves');
+                var justmove = justmoves[movenumber];
                 movenumber++;
-                var y = document.createTextNode(movenumber+". "+piecetype+stringCoordinates.toLowerCase()+checkmark+" ");
+                justmove.innerHTML = movenumber+". "+piecetype+stringCoordinates.toLowerCase()+checkmark+" ";
             }
             else {
-                var y = document.createTextNode(piecetype+stringCoordinates.toLowerCase()+checkmark+" ");
+                var justmoves = document.getElementsByClassName('just-moves');
+                var justmove = justmoves[movenumber-1];
+                justmove.innerHTML += piecetype+stringCoordinates.toLowerCase()+checkmark+" ";     
             }
-            moveslist.appendChild(y);
         }
     };
     if (currentPiece instanceof Piece) {

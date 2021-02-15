@@ -71,19 +71,18 @@ export function chessboard() {
         }
     }
 
-   function getMoves() {
+    function showMoves() {
         let titlemoves = document.createElement('div');
         titlemoves.classList.add('moves-title');
         titlemoves.innerText = 'Moves:';
         listOfMoves.appendChild(titlemoves);
 
-        let allmoves = document.createElement('div');
+        let allmoves = document.createElement('ol');
         allmoves.classList.add('moves-list');
         listOfMoves.appendChild(allmoves);
-    
    }
     getBoard();
     getNumbers();
     getLetters();
-    getMoves();
+    showMoves();
 }
