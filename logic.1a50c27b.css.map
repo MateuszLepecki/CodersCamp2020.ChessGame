@@ -1,0 +1,1 @@
+{"version":3,"sources":["logic.css"],"names":[],"mappings":"AAAA,gBACI,sBAAuB,CACvB,cACJ,CAEA,OACI,cACJ","file":"logic.1a50c27b.css","sourceRoot":"..","sourcesContent":[".possibileMoves{\n    background-color: wheat;\n    cursor: pointer;\n}\n\n.piece {\n    cursor: pointer;\n}"]}
