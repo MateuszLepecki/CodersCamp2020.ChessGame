@@ -54,22 +54,3 @@ describe('timer change60secondsTo1Minute method ', () => {
         expect(timer2.seconds).toBe(60);
     });
 });
-
-// describe('createTimers', () => {
-//     test('call updateDOMTimer', () => {
-//         createTimers();
-//         const MAIN = document.createElement('div');
-//         const newElement = jest.fn(); 
-//         expect(newElement).toHaveBeenCalled();
-//     });
-// });
-
-// describe('createDOMElement', () => {
-//     test('call updateDOMTimer', () => {
-//         const MAIN:HTMLElement = document.createElement('div');
-//         jest.spyOn(MAIN, 'appendChild');
-//        const createDOMElement = jest.fn();
-//         createDOMElement('div','className',MAIN)
-//         expect(createDOMElement).toHaveReturned()
-//     });
-// });
