@@ -1,0 +1,5 @@
+.logotime {
+    grid-area: logo;
+    margin: 0 auto;
+    min-width: 10%;
+}
