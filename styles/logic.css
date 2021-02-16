@@ -1,3 +1,8 @@
 .possibileMoves{
     background-color: wheat;
+    cursor: pointer;
+}
+
+.piece {
+    cursor: pointer;
 }
