@@ -4,5 +4,52 @@
     font-size: large;
     height: 30%;
     width: 30%;
-    border: red solid 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    position:absolute;
+    bottom: 3%;
+    right:3%;
+    font-family: 'Oswald', sans-serif;
+    
+}
+.spellWraper > * {
+    border: 3px white solid;
+    height: 50%;
+    font-size: 14px;
+    margin: auto 0;
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+.randomDisplay, .spellDescription {
+    transition-duration: 0.8s;
+}
+.randomButton, .randomButton::after {
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 25px;
+    font-family: 'Oswald', sans-serif;
+    border: 3px white solid;
+
+}
+.startAnimation {
+background-color: #cc0000;
+}
+.randomButton:after {
+
+    border: 3px white solid;
+}
+.spellDescription {
+  grid-column: 1 / 3;
+  
+}
+
+@media (max-width: 1024px) {
+    .spellWraper {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,6 +1,6 @@
 import { createStartScreen } from './startScreen';
 import { createChessboardScreen } from '../chessboard';
-import {spellSection} from '../wheelOfFortune';
+import { spellSection } from '../wheelOfFortune';
 import { listenDOMchessboard } from '../logic';
 import { createBoardArray } from '../logic';
 import { switchTimers, updateDOMTimer, createTimers } from './timer';
@@ -8,18 +8,18 @@ import { switchTimers, updateDOMTimer, createTimers } from './timer';
 import { createTimeScreen } from '../timeRange';
 
 export const gameSettings = {
-	choosenTime: 10,
-	choosenSkin: 'G'
-}
+    choosenTime: 10,
+    choosenSkin: 'G',
+};
 
 export async function App({}) {
     createStartScreen();
     // await createChessboardScreen();
 
-	// createBoardArray();
-	// createTimers();
+    // createBoardArray();
+    // createTimers();
     // listenDOMchessboard();
-    spellSection();
+    //spellSection();
 
     //updateDOMTimer();
 }

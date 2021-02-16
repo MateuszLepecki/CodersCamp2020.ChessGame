@@ -1,4 +1,6 @@
 import { gameSettings } from './App';
+import { randomSpell} from '../wheelOfFortune'
+
 
 const MAIN = document.querySelector('#main-wrap');
 const DIV_ELEMENT = 'div';
@@ -59,9 +61,28 @@ export class Timer {
 }
 
 export const whichColorTurn = (): string => {
-    if (Timers[0].stopped === false) return 'white';
-    if (Timers[0].endOftime === true || Timers[1].endOftime === true || CANCELTIMER.flag===true) return 'endOfTime';
-    else return 'black';
+    if (randomSpell === 0)
+    {
+        if (Timers[0].stopped === false) {
+            // Timers[0].stopCounting();
+            // Timers[1].startCounting();
+            return 'black';
+        } 
+
+        if (Timers[0].endOftime === true || Timers[1].endOftime === true || CANCELTIMER.flag===true) return 'endOfTime';
+        else  {
+            // Timers[1].stopCounting();
+            // Timers[0].startCounting();
+            return 'white';
+        }
+    }
+    else {
+        if (Timers[0].stopped === false) return 'white';
+        if (Timers[0].endOftime === true || Timers[1].endOftime === true || CANCELTIMER.flag===true) return 'endOfTime';
+        else return 'black';
+    }
+
+    
 };
 
 export const createTimers = (): void => {
