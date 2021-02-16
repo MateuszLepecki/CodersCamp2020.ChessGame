@@ -73,7 +73,25 @@ body {
 }
 .list-of-moves {
     width: 300px;
-    height: 100vh;
+    height: 50vh;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    color: var(--f);
+    overflow-y: scroll;
+}
+
+.list-of-moves::-webkit-scrollbar {
+    background: var(--f);
+    width: 5px;
+}
+
+.list-of-moves::-webkit-scrollbar-thumb {
+    background: var(--f);
+    width: 6px;
+}
+
+.moves-title {
+    color: white;
 }
 
 @media (max-width: 550px) {

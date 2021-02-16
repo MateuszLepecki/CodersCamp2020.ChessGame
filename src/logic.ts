@@ -7,6 +7,7 @@ import { Rook } from './Rook';
 import { Bishop } from './Bishop';
 import { Pawn } from './Pawn';
 import { Knight } from './Knight';
+import { whichColorTurn } from './app/timer';
 
 const bishopW = require('./assets/pieces-svg/bishop_w.svg');
 const bishopB = require('./assets/pieces-svg/bishop_b.svg');
@@ -15,6 +16,7 @@ export const AREASARRAY: Area[] = [];
 let BOARD: HTMLElement;
 export let CHECK = false;
 let kingsIndexes: number[] = [];
+var movenumber = 0;
 
 enum Letters {
     A,
@@ -135,12 +137,59 @@ const selectPiece = (position: coordinates) => {
             checkIfchecked();
             BOARD.removeEventListener('click', listenNewPosition);
             BOARD.addEventListener('click', listenSelection);
+
+
+            var movesdiv = document.getElementsByClassName("moves-list");
+            var moveslist = movesdiv[0];
+
+            switch (currentPiece.type) {
+                case 'knight':
+                    var piecetype: string = "K";
+                    break;
+                case 'bishop':
+                    var piecetype: string = "B";
+                    break;
+                case 'rook':
+                    var piecetype: string = "R";
+                    break;
+                case 'queen':
+                    var piecetype: string = "Q";
+                    break;
+                case 'king':
+                    var piecetype: string = "K";
+                    break;
+                default:
+                    var piecetype: string = "";
+                    break;
+            }
+            
+            if (currentPiece.check) {
+                var checkmark = "+";
+            } else var checkmark = "";
+
+            if (whichColorTurn() === "black") {
+                var allmoves = document.getElementsByClassName("moves-list");
+                var allmoveslist = allmoves[0];
+                var moveel = document.createElement('li');
+                moveel.classList.add('just-moves');
+                allmoveslist.appendChild(moveel);
+                var justmoves = document.getElementsByClassName('just-moves');
+                var justmove = justmoves[movenumber];
+                movenumber++;
+                justmove.innerHTML = movenumber+". "+piecetype+stringCoordinates.toLowerCase()+checkmark+" ";
+            }
+            else {
+                var justmoves = document.getElementsByClassName('just-moves');
+                var justmove = justmoves[movenumber-1];
+                justmove.innerHTML += piecetype+stringCoordinates.toLowerCase()+checkmark+" ";     
+            }
         }
     };
     if (currentPiece instanceof Piece) {
         BOARD.addEventListener('click', listenNewPosition);
     } else BOARD.addEventListener('click', listenSelection);
 };
+
 
 export const getAreaArrayIndex = (coordinates: coordinates): number => {
     let index = AREASARRAY.findIndex((e) => {
