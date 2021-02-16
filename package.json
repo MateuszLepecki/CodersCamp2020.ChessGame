@@ -72,5 +72,8 @@
                 "staticOutDir": "static"
             }
         ]
+    },
+    "dependencies": {
+        "parcel": "^1.12.4"
     }
 }
