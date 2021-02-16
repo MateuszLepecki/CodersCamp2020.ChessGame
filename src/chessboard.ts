@@ -86,18 +86,17 @@ export function chessboard() {
 function setBoardColor() {
     let root = document.documentElement;
 
-          if(gameSettings.choosenSkin === 'G'){
-            root.style.setProperty('--f', '#d67e03');
-            root.style.setProperty('--s', '#6c1a31');
-        } else if(gameSettings.choosenSkin === 'H'){
-            root.style.setProperty('--f', '#5e3225');
-            root.style.setProperty('--s', '#ba7625');
-        } else if(gameSettings.choosenSkin === 'R'){
-            root.style.setProperty('--f', '#7b9bc1');
-            root.style.setProperty('--s', '#063f53');
-        } else if(gameSettings.choosenSkin === 'S'){
-            root.style.setProperty('--f', '#8b8a8f');
-            root.style.setProperty('--s', '#063f53');
-        }
-    
+    if (gameSettings.choosenSkin === 'G') {
+        root.style.setProperty('--f', '#d67e03');
+        root.style.setProperty('--s', '#6c1a31');
+    } else if (gameSettings.choosenSkin === 'H') {
+        root.style.setProperty('--f', '#5e3225');
+        root.style.setProperty('--s', '#ba7625');
+    } else if (gameSettings.choosenSkin === 'R') {
+        root.style.setProperty('--f', '#7b9bc1');
+        root.style.setProperty('--s', '#063f53');
+    } else if (gameSettings.choosenSkin === 'S') {
+        root.style.setProperty('--f', '#8b8a8f');
+        root.style.setProperty('--s', '#134731');
+    }
 }
