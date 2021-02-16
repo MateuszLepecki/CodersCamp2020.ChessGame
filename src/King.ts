@@ -85,7 +85,7 @@ export class King extends Piece {
             CANCELTIMER.flag = true;
             if (MAIN instanceof HTMLElement) {
                 const youLoseDiv = createDOMElement(DIV_ELEMENT, 'youLose', MAIN);
-                youLoseDiv.innerText = 'YOU LOSE!';
+                youLoseDiv.innerText = 'WE HAVE A WINNER!';
             }
         }
     }

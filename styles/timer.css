@@ -19,7 +19,7 @@
 .youLose {
     font-family: 'Oswald', sans-serif;
     position: absolute;
-    right: 45%;
+    right: 43%;
     top: 50%;
     padding: 30px;
     border: 3px solid var(--c);
