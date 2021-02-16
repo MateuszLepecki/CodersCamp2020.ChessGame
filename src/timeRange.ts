@@ -1,12 +1,22 @@
 import { createNewElement, createNewImgElement } from './app/startScreen';
 import { gameSettings } from './app/App';
-import { chessboard } from './chessboard';
+import { createChessboardScreen } from './chessboard';
 import { listenDOMchessboard } from './logic';
 import { createBoardArray } from './logic';
+import { switchTimers, updateDOMTimer, createTimers } from './app/timer';
 const logo = require('./assets/logo/chess_logo_logo.svg');
 
 const mainWrap = document.getElementById('main-wrap');
 
+async function createChessboard() {
+    await createChessboardScreen();
+
+    createBoardArray();
+
+    listenDOMchessboard();
+    createTimers();
+    updateDOMTimer();
+}
 
 export function createTimeScreen() {
     createTimeScreenStructure();
@@ -27,19 +37,13 @@ function createTimeScreenStructure() {
 
     const rangeWrap = createNewElement('div', 'rangewrap', startWrap);
     let timeInput = createNewRangeInputElement('10', '60', '10', LABEL_TEXT, 'timeset', rangeWrap);
-    let timeOutput = document.querySelector('#outputtime');
+    let timeOutput = document.querySelector('#outputtime') as HTMLOutputElement;
     chooseTime(timeInput);
     showChosenTime(timeInput, timeOutput);
 
     const playBtn = createNewElement('button', 'btn startbtn', startWrap, PLAY_BTN);
-    // playBtn.addEventListener('click', async function() {
-
-    //     await chessboard();
-
-	//     createBoardArray();
-
-	//     listenDOMchessboard();
-    // })
+    playBtn.addEventListener('click', createChessboard);
+    setTimerColor();
 }
 
 function createNewRangeInputElement(min: string, max: string, step: string, label: string, id: string, parent: HTMLElement, text: string = '') {
@@ -76,4 +80,18 @@ function showChosenTime(i: HTMLInputElement, o: HTMLOutputElement){
     i.addEventListener('input', function () {
         o.innerHTML = i.value + 'MINS';
       }, false);
+}
+
+function setTimerColor() {
+    let root = document.documentElement;
+          if(gameSettings.choosenSkin === 'G'){
+            root.style.setProperty('--c', '#d67e03');
+        } else if(gameSettings.choosenSkin === 'H'){
+            root.style.setProperty('--c', '#5e3225');
+        } else if(gameSettings.choosenSkin === 'R'){
+            root.style.setProperty('--c', '#7b9bc1');
+        } else if(gameSettings.choosenSkin === 'S'){
+            root.style.setProperty('--c', '#134731');
+        }
+    
 }
