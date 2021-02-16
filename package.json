@@ -60,6 +60,9 @@
         ],
         "transform": {
             "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "moduleNameMapper": {
+            "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/assetsTransformer.js"
         }
     },
     "staticFiles": {
